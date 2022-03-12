@@ -1,0 +1,19 @@
+// TOOLS
+
+@import "./sass/1-tools/variables";
+@import "./sass/1-tools/mixin";
+
+
+//STRUCTURE
+
+@import "./sass/2-structure/general";
+@import "./sass/2-structure/header";
+@import "./sass/2-structure/footer";
+
+// PAGES
+
+@import "./sass/3-pages/home";
+
+//RESPONSIVE
+
+@import "./sass/4-responsive/responsive";

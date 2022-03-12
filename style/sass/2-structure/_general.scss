@@ -1,0 +1,30 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  @include flexMid;
+  flex-direction: column;
+  font-family: Lato;
+}
+
+main {
+  @include maxWidth;
+  width: 100%;
+  padding: 0 20px;
+  @include flexMid;
+  flex-direction: column;
+}
+
+h1 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 47px;
+  /* identical to box height */
+  text-align: center;
+  color: #d04f4f;
+}

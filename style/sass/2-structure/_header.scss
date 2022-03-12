@@ -1,0 +1,10 @@
+header{
+    width: 100%;
+    @include flexMid;
+    @include maxWidth;
+    flex-direction: column;
+    padding: 10px;
+    a{
+        margin-top: 20px;
+    }
+}

@@ -87,6 +87,18 @@
       flex-direction: column;
       border-radius: 3px;
       display: flex;
+      &.m-w-450px{
+        max-width: 550Px;
+        width: 100%;
+      }
+      &.m-w-300px{
+        max-width: 400Px;
+        width: 100%;
+      }
+      &.m-w-150px{
+        max-width: 250Px;
+        width: 100%;
+      }
       .filter-header {
         // background-color: darkmagenta;
         display: flex;
@@ -102,7 +114,7 @@
           border: none;
           cursor: pointer;
         }
-        .fliter-input {
+        .filter-input {
           background-color: transparent;
           border: none;
           width: 100%;
@@ -115,7 +127,7 @@
           position: relative;
           color: white;
         }
-        .fliter-input::placeholder {
+        .filter-input::placeholder {
           color: white;
           opacity: 0.5;
           font-family: Lato;
@@ -126,17 +138,23 @@
       }
       .filter-content {
         display: grid;
-        // width: 500px;
-        max-width: 500px;
         max-height: 250px;
         padding: 0 15px;
         margin-bottom: 15px;
+        overflow: auto;
         .test {
-          width: 100%;
-          max-width: 150px;
-          height: 25px;
+          height: 30px;
           display: flex;
           align-items: center;
+          font-size: 14px;
+          label{
+            color: rgba(255, 255, 255, 0.534);
+            &:hover {
+              background-color: #5095fd;
+              // color: #5095fd;
+            }
+
+          }
         }
       }
 
@@ -155,10 +173,10 @@
     display: none !important;
   }
   .grid-column-1 {
-    grid-template-columns: 150px;
+    grid-template-columns: 100%;
   }
   .grid-column-2 {
-    grid-template-columns: 150px 150px;
+    grid-template-columns: 50% 50%;
   }
   .grid-column-3 {
     grid-template-columns: 33% 33% 33%;
@@ -219,5 +237,9 @@
 @media screen and (max-width:767px) {
   #recette-card-container{
     grid-template-columns: repeat(1, 1fr);
+  }
+  .card-recette{
+    max-width: 500px;
+    margin: auto
   }
 };

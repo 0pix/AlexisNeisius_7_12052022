@@ -202,6 +202,21 @@ header a {
   display: flex;
 }
 
+#filter-container #filters-bloc .filter.m-w-450px {
+  max-width: 550Px;
+  width: 100%;
+}
+
+#filter-container #filters-bloc .filter.m-w-300px {
+  max-width: 400Px;
+  width: 100%;
+}
+
+#filter-container #filters-bloc .filter.m-w-150px {
+  max-width: 250Px;
+  width: 100%;
+}
+
 #filter-container #filters-bloc .filter .filter-header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -225,7 +240,7 @@ header a {
   cursor: pointer;
 }
 
-#filter-container #filters-bloc .filter .filter-header .fliter-input {
+#filter-container #filters-bloc .filter .filter-header .filter-input {
   background-color: transparent;
   border: none;
   width: 100%;
@@ -239,7 +254,7 @@ header a {
   color: white;
 }
 
-#filter-container #filters-bloc .filter .filter-header .fliter-input::-webkit-input-placeholder {
+#filter-container #filters-bloc .filter .filter-header .filter-input::-webkit-input-placeholder {
   color: white;
   opacity: 0.5;
   font-family: Lato;
@@ -248,7 +263,7 @@ header a {
   font-size: 12px;
 }
 
-#filter-container #filters-bloc .filter .filter-header .fliter-input:-ms-input-placeholder {
+#filter-container #filters-bloc .filter .filter-header .filter-input:-ms-input-placeholder {
   color: white;
   opacity: 0.5;
   font-family: Lato;
@@ -257,7 +272,7 @@ header a {
   font-size: 12px;
 }
 
-#filter-container #filters-bloc .filter .filter-header .fliter-input::-ms-input-placeholder {
+#filter-container #filters-bloc .filter .filter-header .filter-input::-ms-input-placeholder {
   color: white;
   opacity: 0.5;
   font-family: Lato;
@@ -266,7 +281,7 @@ header a {
   font-size: 12px;
 }
 
-#filter-container #filters-bloc .filter .filter-header .fliter-input::placeholder {
+#filter-container #filters-bloc .filter .filter-header .filter-input::placeholder {
   color: white;
   opacity: 0.5;
   font-family: Lato;
@@ -278,22 +293,29 @@ header a {
 #filter-container #filters-bloc .filter .filter-content {
   display: -ms-grid;
   display: grid;
-  max-width: 500px;
   max-height: 250px;
   padding: 0 15px;
   margin-bottom: 15px;
+  overflow: auto;
 }
 
 #filter-container #filters-bloc .filter .filter-content .test {
-  width: 100%;
-  max-width: 150px;
-  height: 25px;
+  height: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  font-size: 14px;
+}
+
+#filter-container #filters-bloc .filter .filter-content .test label {
+  color: rgba(255, 255, 255, 0.534);
+}
+
+#filter-container #filters-bloc .filter .filter-content .test label:hover {
+  background-color: #5095fd;
 }
 
 #filter-container #filters-bloc .filter.filter-blue {
@@ -313,13 +335,13 @@ header a {
 }
 
 #filter-container .grid-column-1 {
-  -ms-grid-columns: 150px;
-      grid-template-columns: 150px;
+  -ms-grid-columns: 100%;
+      grid-template-columns: 100%;
 }
 
 #filter-container .grid-column-2 {
-  -ms-grid-columns: 150px 150px;
-      grid-template-columns: 150px 150px;
+  -ms-grid-columns: 50% 50%;
+      grid-template-columns: 50% 50%;
 }
 
 #filter-container .grid-column-3 {
@@ -408,6 +430,10 @@ header a {
   #recette-card-container {
     -ms-grid-columns: (1fr)[1];
         grid-template-columns: repeat(1, 1fr);
+  }
+  .card-recette {
+    max-width: 500px;
+    margin: auto;
   }
 }
 /*# sourceMappingURL=style.css.map */

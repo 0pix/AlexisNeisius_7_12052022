@@ -112,30 +112,28 @@ export function getTagChecked () {
   const allChecked = []
   filter.forEach(function (item) {
     if (item.firstElementChild.checked) {
-      allChecked.push(item.firstElementChild.id)
+      allChecked.push(
+        { item: item.firstElementChild.id, color: item.firstElementChild.getAttribute('classCss') }
+      )
       item.lastElementChild.style.color = 'white'
     } else {
       item.lastElementChild.style.color = 'rgba(255, 255, 255, 0.534)'
     }
   })
   allChecked.sort()
-
+  console.log('coucou');
   return allChecked
 }
 
 /** *************|afficher les tags en haut|***************/
 export function TagsOnTop (allChecked) {
   const tagbloc = document.getElementById('tags-bloc')
-  console.log(allChecked)
-  // allChecked.forEach(e => {
-  //   console.log('ici :', e)
-  // })
   tagbloc.innerHTML = allChecked
     .map(
       (tag) =>
  `
- <div class="tags ${tag.classCss}" >
-   <div class="tags-text">${tag}</div>
+ <div class="tags ${tag.color}" >
+   <div class="tags-text">${tag.item}</div>
    <button class="closeBtnTag"><img class="closeBtnTag" src="./img/svg/cross.svg" alt=""></button>
  </div>
  `

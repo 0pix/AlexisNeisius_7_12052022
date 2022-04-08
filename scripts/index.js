@@ -59,9 +59,9 @@ function init () {
   data.ingrediensFiltered = getIngregdientForTag(recipes) // récuperer tout les ingrédients
   data.devicesFiltered = getDevicesForTag(recipes) // récuperer tout les appareils
   data.utensilsFiltered = getUtensilsForTag(recipes) // récuperer tout les ustentils
-  innertTags(filterContent, 0, data.ingrediensFiltered) // afficher les ingrédients dans le boutons
-  innertTags(filterContent, 1, data.devicesFiltered) // afficher les appareils dans le boutons
-  innertTags(filterContent, 2, data.utensilsFiltered) // afficher les appareils dans le boutons
+  innertTags(filterContent, 0, data.ingrediensFiltered, data.ingrediensSearchBar, 'tags-blue')// afficher les ingrédients dans le boutons
+  innertTags(filterContent, 1, data.devicesFiltered, data.devicesSearchBar, 'tags-green') // afficher les appareils dans le boutons
+  innertTags(filterContent, 2, data.utensilsFiltered, data.utensilsSearchBar, 'tags-red')// afficher les appareils dans le boutons
 }
 init()
 
@@ -107,12 +107,11 @@ document.addEventListener('click', function (event) {
   removeTagFromTop(event)
   TagsOnTop(data.checkedAll)
   data.checkedAll = getTagChecked()
-  console.log(data.checkedAll)
 })
 
 // Remove tags from top
-document.addEventListener('click', function (event) {
-  TagsOnTop(data.checkedAll)
-  removeTagFromTop(event)
-  data.checkedAll = getTagChecked(buttonsFilters)
-})
+// document.addEventListener('click', function (event) {
+//   TagsOnTop(data.checkedAll)
+//   removeTagFromTop(event)
+//   data.checkedAll = getTagChecked(buttonsFilters)
+// })

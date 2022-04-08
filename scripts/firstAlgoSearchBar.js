@@ -68,6 +68,5 @@ export function getGoodRecipe (ids, recipes) {
       }
     }
   }
-  console.log(recipe)
   return recipe
 }

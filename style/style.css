@@ -121,7 +121,7 @@ header a {
 
 #filter-container #tags-bloc .tags {
   padding: 10px 15px;
-  background-color: #3282F7;
+  background-color: red;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -134,6 +134,10 @@ header a {
   border-radius: 5px;
   width: auto;
   gap: 10px;
+}
+
+#filter-container #tags-bloc .tags.tags-blue {
+  background-color: #3282F7;
 }
 
 #filter-container #tags-bloc .tags.tags-green {

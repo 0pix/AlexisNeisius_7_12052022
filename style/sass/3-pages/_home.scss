@@ -37,13 +37,16 @@
     margin-top: 20px;
     .tags {
       padding: 10px 15px;
-      background-color: $blue;
+      background-color: red;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-radius: 5px;
       width: auto;
       gap: 10px;
+      &.tags-blue{
+        background-color: $blue;
+      }
       &.tags-green{
         background-color: $green;
       }

@@ -1,28 +1,9 @@
 // const buttonsFilters = document.querySelectorAll('.filter')
 
 /** *************|Nombre de colones des filtres|***************/
-export function setCollumn (number, buttonsFilters) {
-  const button = buttonsFilters[number].querySelector('button')
-  button.addEventListener('click', function () {
-    const blocFilters = buttonsFilters[number].querySelector('.filter-content')
-    const filter = buttonsFilters[number].querySelectorAll('.test')
-    if (filter.length < 10) {
-      blocFilters.classList.add('grid-column-1')
-      buttonsFilters[number].classList.add('m-w-150px')
-    } else if (filter.length > 10 && filter.length < 21) {
-      blocFilters.classList.add('grid-column-2')
-      buttonsFilters[number].classList.add('m-w-300px')
-    } else if (filter.length >= 21) {
-      blocFilters.classList.add('grid-column-3')
-      buttonsFilters[number].classList.add('m-w-450px')
-    }
-  })
-}
-
 export function setCollumnFromBar (number, buttonsFilters) {
   const blocFilters = buttonsFilters[number].querySelector('.filter-content')
   const filter = buttonsFilters[number].querySelectorAll('.test')
-  console.log(filter.length)
   if (filter.length < 10) {
     blocFilters.classList.add('grid-column-1')
     blocFilters.classList.remove('grid-column-2')
@@ -41,8 +22,8 @@ export function setCollumnFromBar (number, buttonsFilters) {
   }
   if (filter.length >= 21) {
     blocFilters.classList.add('grid-column-3')
-    blocFilters.classList.add('grid-column-3')
-    blocFilters.classList.add('grid-column-3')
+    blocFilters.classList.add('grid-column-2')
+    blocFilters.classList.add('grid-column-1')
     buttonsFilters[number].classList.add('m-w-450px')
     buttonsFilters[number].classList.remove('m-w-150px')
     buttonsFilters[number].classList.remove('m-w-300px')
@@ -73,28 +54,4 @@ export function openAllFilters (number, buttonsFilters) {
     )
   }
 }
-// export function openAllFilters (number, buttonsFilters) {
-//   const button = buttonsFilters[number].querySelector('button')
-//   const filterInput = buttonsFilters[number].querySelector('.filter-input')
-//   const blocFilters = buttonsFilters[number].querySelector('.filter-content ')
-//   const filterTitle = buttonsFilters[number].querySelector('.filter-title')
-//   button.addEventListener('click', function () {
-//     if (blocFilters.classList.contains('hide')) {
-//       blocFilters.classList.remove('hide')
-//       filterInput.classList.remove('hide')
-//       filterTitle.classList.add('hide')
-//       button.style.transform = 'rotate(180deg)'
-//     } else {
-//       blocFilters.classList.add('hide')
-//       filterInput.classList.add('hide')
-//       filterTitle.classList.remove('hide')
-//       button.style.transform = 'rotate(0deg)'
-//       filterInput.value = ''
-//       buttonsFilters[number].classList.remove(
-//         'm-w-150px',
-//         'm-w-300px',
-//         'm-w-450px'
-//       )
-//     }
-//   })
-// }
+

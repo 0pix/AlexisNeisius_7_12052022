@@ -44,6 +44,12 @@
       border-radius: 5px;
       width: auto;
       gap: 10px;
+      &.tags-green{
+        background-color: $green;
+      }
+      &.tags-red{
+        background-color: $red;
+      }
       .tags-text {
         font-style: normal;
         font-weight: bold;

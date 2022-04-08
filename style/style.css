@@ -136,6 +136,14 @@ header a {
   gap: 10px;
 }
 
+#filter-container #tags-bloc .tags.tags-green {
+  background-color: #68D9A4;
+}
+
+#filter-container #tags-bloc .tags.tags-red {
+  background-color: #ED6454;
+}
+
 #filter-container #tags-bloc .tags .tags-text {
   font-style: normal;
   font-weight: bold;

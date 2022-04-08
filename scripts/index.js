@@ -4,8 +4,8 @@
 import { recipes } from './../data/recipes.js'
 import { getIdRecipe2, getGoodRecipe2 } from './../scripts/secondAlgoSearchBar.js'
 import { getIdRecipe, getGoodRecipe } from './../scripts/firstAlgoSearchBar.js'
-import { setCollumn, openAllFilters, setCollumnFromBar } from './../scripts/button-filter.js'
-import { getIngregdientForTag, getDevicesForTag, getUtensilsForTag, innertTags, getTagChecked, removeTagFromTop, searchBarTag } from './../scripts/tag.js'
+import { openAllFilters, setCollumnFromBar } from './../scripts/button-filter.js'
+import { getIngregdientForTag, getDevicesForTag, getUtensilsForTag, innertTags, getTagChecked, removeTagFromTop, searchBarTag, TagsOnTop } from './../scripts/tag.js'
 
 const buttonsFilters = document.querySelectorAll('.filter')
 const filterContent = document.querySelectorAll('.filter-content')
@@ -13,8 +13,6 @@ const filterBlocs = document.getElementById('filters-bloc')
 const searchBar = document.getElementById('search-bar')
 const input = document.querySelectorAll('.filter-input')
 const arrowBtn = filterBlocs.querySelectorAll('button')
-console.log(filterBlocs)
-console.log(arrowBtn)
 const data = {
   titles: [],
   titlesFiltered: [],
@@ -28,7 +26,8 @@ const data = {
   checkedUtensils: [],
   utensilsSearchBar: [],
   goodIds: [],
-  goodRecipe: []
+  goodRecipe: [],
+  checkedAll: []
 }
 
 /** *************|Barre de recherche algo 1|***************/
@@ -48,7 +47,6 @@ searchBar.addEventListener('keydown', function (event) {
   data.goodIds = getIdRecipe2(event, recipes)
   data.goodRecipe = getGoodRecipe2(recipes, data.goodIds)
   recipeOnGrid()
-  console.log(data.goodRecipe)
 })
 // afficher les recettes dans la grille
 function recipeOnGrid () {
@@ -64,28 +62,24 @@ function init () {
   innertTags(filterContent, 0, data.ingrediensFiltered) // afficher les ingrédients dans le boutons
   innertTags(filterContent, 1, data.devicesFiltered) // afficher les appareils dans le boutons
   innertTags(filterContent, 2, data.utensilsFiltered) // afficher les appareils dans le boutons
-  // [data.ingrediens, data.devicesFiltered, data.utensils].forEach((e,i) => innerTags(filterContent, i, e))
-  removeTagFromTop(buttonsFilters, 0)
 }
 init()
 
 arrowBtn[0].addEventListener('click', () => {
   setCollumnFromBar(0, buttonsFilters)
   openAllFilters(0, buttonsFilters)
-  console.log('coucou')
 })
 arrowBtn[1].addEventListener('click', () => {
   setCollumnFromBar(1, buttonsFilters)
   openAllFilters(1, buttonsFilters)
-  console.log('coucou')
 })
 arrowBtn[2].addEventListener('click', () => {
   setCollumnFromBar(2, buttonsFilters)
   openAllFilters(2, buttonsFilters)
-  console.log('coucou')
 })
+// const tableauDupli = JSON.parse(JSON.stringify(tableau));
 
-// tag
+// tags
 
 // barre de recherche indrédients
 input[0].addEventListener('keyup', () => {
@@ -96,15 +90,29 @@ input[0].addEventListener('keyup', () => {
 // barre de recherche appareils
 input[1].addEventListener('keyup', () => {
   data.devicesSearchBar = searchBarTag(1, data.devicesFiltered)
+  innertTags(filterContent, 1, data.devicesFiltered, data.devicesSearchBar)
+  setCollumnFromBar(1, buttonsFilters)
 })
+
 // barre de recherche ustensils
 input[2].addEventListener('keyup', () => {
   data.utensilsSearchBar = searchBarTag(2, data.utensilsFiltered)
+  innertTags(filterContent, 2, data.utensilsFiltered, data.utensilsSearchBar)
+  setCollumnFromBar(2, buttonsFilters)
 })
 
-buttonsFilters[0].addEventListener('click', function (e) {
-  if (e.target.name === 'checkbox-input') {
-    data.checkedIngrediens = getTagChecked(buttonsFilters, 0)
-    // toDisplayTags()
-  }
+// tags top
+
+document.addEventListener('click', function (event) {
+  removeTagFromTop(event)
+  TagsOnTop(data.checkedAll)
+  data.checkedAll = getTagChecked()
+  console.log(data.checkedAll)
+})
+
+// Remove tags from top
+document.addEventListener('click', function (event) {
+  TagsOnTop(data.checkedAll)
+  removeTagFromTop(event)
+  data.checkedAll = getTagChecked(buttonsFilters)
 })

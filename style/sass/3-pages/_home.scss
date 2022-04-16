@@ -75,6 +75,9 @@
     }
   }
 
+  
+
+
   #filters-bloc {
     align-items: flex-start;
     justify-content: flex-start;
@@ -89,6 +92,16 @@
     height: 97px;
     z-index: 100;
     flex-wrap: wrap;
+    .background-modal{
+      width: 100%;
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      background-color: #5095fd00;
+      z-index: 998;
+    }
+    
     .filter {
       z-index: 100;
       display: flex;
@@ -165,6 +178,9 @@
 
           }
         }
+      }
+      &.index999{
+        z-index: 999;
       }
 
       &.filter-blue {

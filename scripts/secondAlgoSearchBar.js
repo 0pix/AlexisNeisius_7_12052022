@@ -1,4 +1,5 @@
-export function getIdRecipe2 (event, recipes) {
+
+export function getIdRecipe2 (event, recipes, allChecked) {
   const text = event.target.value
   let ids = recipes.map(obj => {
     const name = obj.name.toLowerCase()
@@ -12,6 +13,8 @@ export function getIdRecipe2 (event, recipes) {
     if (text && descriptionLowerCase.includes(text.toLowerCase())) {
       return obj.id
     }
+
+    if (allChecked.length) console.log('filter', filterTag(recipes, allChecked))
 
     // ingredient
     const myingredient = obj.ingredients.filter(object => {
@@ -69,3 +72,32 @@ export function getGoodRecipe2 (recipes, ids) {
   })
   return goodRecipe
 }
+
+function filterTag (obj, allChecked) {
+  const ingredients = allChecked.filter(element => element.color === 'tags-blue')
+  const appareils = allChecked.filter(element => element.color === 'tags-green')
+  const ustensils = allChecked.filter(element => element.color === 'tags-red')
+  console.log(ingredients)
+
+  const conditionIngredients = ingredients.every(ingredient => {
+    return obj.ingredients.find(element => element.ingredient === ingredient)
+  })
+  const conditionAppareils = appareils.some(appareil => {
+    return obj.appliance === appareil
+  })
+  const conditionUstensils = ustensils.every(ustensil => {
+    return obj.ustensils.includes(ustensil)
+  })
+  if ((!ingredients.length || conditionIngredients) && (!appareils.length || conditionAppareils) && (!ustensils.length || conditionUstensils)) return obj.id
+  return 0
+}
+
+// Not Supported in IE 9-11
+// const arr1 = ['pizza', 'cola'];
+// const arr2 = ['pizza', 'cake', 'cola'];
+
+// const containsAll = arr1.every(element => {
+//   return arr2.includes(element);
+// });
+
+// console.log(containsAll); // 👉 true

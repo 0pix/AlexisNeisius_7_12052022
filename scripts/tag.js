@@ -8,6 +8,7 @@ export function getIngregdientForTag (recipes) {
     })
   })
   data = cleanDataTag(data)
+  console.log(data)
   return data
 }
 
@@ -37,18 +38,14 @@ export function getUtensilsForTag (recipes) {
 function cleanDataTag (data) {
   //  trier le tableau par ordre alphabétique
   data.sort()//  trier le tableau par ordre alphabétique
+
+  // mettre la première lettre en majuscule
+  data = data.map(word => {
+    return word.charAt(0).toUpperCase() + word.slice(1)
+  })
+
   // retirer les doublons
   data = [...new Set(data)]
-  // retirer les ingrédients avec un S
-  // data = data.filter((valeur, index) => {
-  //   console.log(valeur);
-  //   return !(valeur.includes(data[index + 1]) || data[index + 1].includes(valeur))
-  // })
-  // data.forEach(valeur, index) => {
-  //   if(i.includes(data[index+1]) || data[index+1].includes(i)){
-  //     data.splice(valeur, 1)
-  //   }
-  // }
 
   for (let i = 0; i < data.length - 1; i++) {
     if (data[i].includes(data[i + 1]) || data[i + 1].includes(data[i])) {
@@ -56,14 +53,21 @@ function cleanDataTag (data) {
     }
   }
 
+  //  retirer les ingrédients avec un S
+  for (let i = 0; i < data.length - 1; i++) {
+    if (data[i].includes(data[i + 1]) || data[i + 1].includes(data[i])) {
+      data.splice(i, 1)
+    }
+  }
+
   //  retirer les ingrédients avec un accents
-  // data.forEach(i => {
-  //   const elt = i.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-  //   const nextElt = [i + 1].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-  //   if (elt.includes(nextElt) || elt.includes(nextElt)) {
-  //     data.splice(i, 1)
-  //   }
-  // })
+  for (let i = 0; i < data.length - 1; i++) {
+    const elt = data[i].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    const nextElt = data[i + 1].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    if (elt.includes(nextElt) || elt.includes(nextElt)) {
+      data.splice(i, 1)
+    }
+  }
 
   return data
 }
@@ -96,9 +100,9 @@ export function innertTags (target, number, data1, data2, classCss) {
     .map(
       (ingredient) =>
           `
-      <div class="test">
+      <div class="test tag">
       <input type="checkbox" classCss=${classCss} class="hide" id="${ingredient}" name="checkbox-input" value="${ingredient}">
-      <label name="checkbox-label" for="${ingredient}">${ingredient}</label>
+      <label name="checkbox-label"  for="${ingredient}">${ingredient}</label>
       </div>
       `
     )
@@ -121,7 +125,7 @@ export function getTagChecked () {
     }
   })
   allChecked.sort()
-  console.log('coucou');
+  // console.log('coucou');
   return allChecked
 }
 
@@ -132,9 +136,9 @@ export function TagsOnTop (allChecked) {
     .map(
       (tag) =>
  `
- <div class="tags ${tag.color}" >
+ <div class="tags ${tag.color} tag" >
    <div class="tags-text">${tag.item}</div>
-   <button class="closeBtnTag"><img class="closeBtnTag" src="./img/svg/cross.svg" alt=""></button>
+   <button class="closeBtnTag tag"><img class="closeBtnTag tag" src="./img/svg/cross.svg" alt=""></button>
  </div>
  `
     )
@@ -142,14 +146,12 @@ export function TagsOnTop (allChecked) {
 }
 
 /** *************|UncheckTag|***************/
-export function removeTagFromTop (event) {
+export function uncheckTag (event) {
   const allTags = document.querySelectorAll('.test')
-  if (event.target.className === 'closeBtnTag') {
-    allTags.forEach(function (item) {
-      if (item.firstElementChild.checked && item.firstElementChild.value === event.target.parentNode.previousElementSibling.textContent) {
-        item.lastElementChild.style.color = 'white'
-        item.firstElementChild.checked = false
-      }
-    })
-  }
+  allTags.forEach(function (item) {
+    if (item.firstElementChild.checked && item.firstElementChild.value === event.target.parentNode.previousElementSibling.textContent) {
+      item.lastElementChild.style.color = 'white'
+      item.firstElementChild.checked = false
+    }
+  })
 }

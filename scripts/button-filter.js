@@ -34,7 +34,7 @@ export function setCollumnFromBar (number, buttonsFilters) {
 export function openAllFilters (number, buttonsFilters) {
   const button = buttonsFilters[number].querySelector('button')
   const filterInput = buttonsFilters[number].querySelector('.filter-input')
-  const blocFilters = buttonsFilters[number].querySelector('.filter-content ')
+  const blocFilters = buttonsFilters[number].querySelector('.filter-content')
   const filterTitle = buttonsFilters[number].querySelector('.filter-title')
   if (blocFilters.classList.contains('hide')) {
     blocFilters.classList.remove('hide')
@@ -55,3 +55,21 @@ export function openAllFilters (number, buttonsFilters) {
   }
 }
 
+/** *************|Background Modal|***************/
+
+export function closeFilterFromBack (number, buttonsFilters) {
+  const button = buttonsFilters[number].querySelector('button')
+  const filterInput = buttonsFilters[number].querySelector('.filter-input')
+  const blocFilters = buttonsFilters[number].querySelector('.filter-content')
+  const filterTitle = buttonsFilters[number].querySelector('.filter-title')
+  blocFilters.classList.add('hide')
+  filterInput.classList.add('hide')
+  filterTitle.classList.remove('hide')
+  button.style.transform = 'rotate(0deg)'
+  filterInput.value = ''
+  buttonsFilters[number].classList.remove(
+    'm-w-150px',
+    'm-w-300px',
+    'm-w-450px'
+  )
+}

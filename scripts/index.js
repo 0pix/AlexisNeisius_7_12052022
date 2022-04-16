@@ -4,8 +4,8 @@
 import { recipes } from './../data/recipes.js'
 import { getIdRecipe2, getGoodRecipe2 } from './../scripts/secondAlgoSearchBar.js'
 import { getIdRecipe, getGoodRecipe } from './../scripts/firstAlgoSearchBar.js'
-import { openAllFilters, setCollumnFromBar } from './../scripts/button-filter.js'
-import { getIngregdientForTag, getDevicesForTag, getUtensilsForTag, innertTags, getTagChecked, removeTagFromTop, searchBarTag, TagsOnTop } from './../scripts/tag.js'
+import { openAllFilters, setCollumnFromBar, closeFilterFromBack } from './../scripts/button-filter.js'
+import { getIngregdientForTag, getDevicesForTag, getUtensilsForTag, innertTags, getTagChecked, uncheckTag, searchBarTag, TagsOnTop } from './../scripts/tag.js'
 
 const buttonsFilters = document.querySelectorAll('.filter')
 const filterContent = document.querySelectorAll('.filter-content')
@@ -17,13 +17,10 @@ const data = {
   titles: [],
   titlesFiltered: [],
   ingrediensFiltered: [],
-  checkedIngrediens: [],
   ingrediensSearchBar: [],
   devicesFiltered: [],
-  checkedDevices: [],
   devicesSearchBar: [],
   utensilsFiltered: [],
-  checkedUtensils: [],
   utensilsSearchBar: [],
   goodIds: [],
   goodRecipe: [],
@@ -44,7 +41,7 @@ const data = {
 
 /** *************|Barre de recherche algo 2|***************/
 searchBar.addEventListener('keydown', function (event) {
-  data.goodIds = getIdRecipe2(event, recipes)
+  data.goodIds = getIdRecipe2(event, recipes, data.checkedAll)
   data.goodRecipe = getGoodRecipe2(recipes, data.goodIds)
   recipeOnGrid()
 })
@@ -79,6 +76,25 @@ arrowBtn[2].addEventListener('click', () => {
 })
 // const tableauDupli = JSON.parse(JSON.stringify(tableau));
 
+document.addEventListener('click', function (e) {
+  if (e.target.parentNode.parentNode.classList.contains('filter-header')) {
+    const background = document.getElementById('background-modal')
+    background.classList.toggle('background-modal')
+    e.target.parentNode.parentNode.parentNode.classList.toggle('index999')
+  }
+  // close from background modal
+  if (e.target.id === 'background-modal') {
+    const background = document.getElementById('background-modal')
+    background.classList.remove('background-modal')
+    buttonsFilters.forEach(valeur => {
+      valeur.classList.remove('index999')
+    })
+    closeFilterFromBack(0, buttonsFilters)
+    closeFilterFromBack(1, buttonsFilters)
+    closeFilterFromBack(2, buttonsFilters)
+  }
+})
+
 // tags
 
 // barre de recherche indrédients
@@ -93,7 +109,6 @@ input[1].addEventListener('keyup', () => {
   innertTags(filterContent, 1, data.devicesFiltered, data.devicesSearchBar)
   setCollumnFromBar(1, buttonsFilters)
 })
-
 // barre de recherche ustensils
 input[2].addEventListener('keyup', () => {
   data.utensilsSearchBar = searchBarTag(2, data.utensilsFiltered)
@@ -102,16 +117,19 @@ input[2].addEventListener('keyup', () => {
 })
 
 // tags top
-
 document.addEventListener('click', function (event) {
-  removeTagFromTop(event)
-  TagsOnTop(data.checkedAll)
-  data.checkedAll = getTagChecked()
+  if (event.target.parentNode.classList.contains('tag')) {
+    // console.log(event.target.parentNode.classList)
+    data.checkedAll = getTagChecked()
+    TagsOnTop(data.checkedAll)
+  }
 })
 
 // Remove tags from top
-// document.addEventListener('click', function (event) {
-//   TagsOnTop(data.checkedAll)
-//   removeTagFromTop(event)
-//   data.checkedAll = getTagChecked(buttonsFilters)
-// })
+document.addEventListener('click', function (event) {
+  if (event.target.classList.contains('closeBtnTag')) {
+    uncheckTag(event)
+    data.checkedAll = getTagChecked()
+    TagsOnTop(data.checkedAll)
+  }
+})

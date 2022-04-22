@@ -20,6 +20,7 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
   font-family: Lato;
+  background-color: #2e2e2e;
 }
 
 main {
@@ -185,17 +186,11 @@ header a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding: 20px 0;
   font-style: normal;
   font-size: 15px;
   line-height: 17px;
   color: white;
-  justify-content: flex-start;
-  gap: 20px;
-  height: 97px;
   z-index: 100;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
 }
 
 #filter-container #filters-bloc .background-modal {
@@ -204,7 +199,7 @@ header a {
   position: fixed;
   left: 0;
   top: 0;
-  background-color: #5095fd00;
+  background-color: #2768ca3d;
   z-index: 998;
 }
 
@@ -222,20 +217,23 @@ header a {
           flex-direction: column;
   border-radius: 3px;
   display: flex;
+  margin-right: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 #filter-container #filters-bloc .filter.m-w-450px {
-  max-width: 550Px;
+  max-width: 550px;
   width: 100%;
 }
 
 #filter-container #filters-bloc .filter.m-w-300px {
-  max-width: 400Px;
+  max-width: 400px;
   width: 100%;
 }
 
 #filter-container #filters-bloc .filter.m-w-150px {
-  max-width: 250Px;
+  max-width: 250px;
   width: 100%;
 }
 
@@ -452,6 +450,38 @@ header a {
   width: 50%;
 }
 
+#messageRecipe {
+  position: absolute;
+  width: 95%;
+  max-width: 1200px;
+  top: 50%;
+  text-align: center;
+  color: black;
+  font-size: 1.5em;
+}
+
+#messageRecipe p {
+  padding: 10px;
+  width: 100%;
+}
+
+@media screen and (max-width: 1023px) {
+  #recette-card-container {
+    -ms-grid-columns: (1fr)[2];
+        grid-template-columns: repeat(2, 1fr);
+  }
+  #filters-bloc {
+    z-index: 0;
+    -webkit-box-pack: center !important;
+        -ms-flex-pack: center !important;
+            justify-content: center !important;
+  }
+  #filters-bloc #recette-card-container {
+    -ms-grid-columns: (1fr)[1];
+        grid-template-columns: repeat(1, 1fr);
+  }
+}
+
 @media screen and (max-width: 767px) {
   #recette-card-container {
     -ms-grid-columns: (1fr)[1];
@@ -460,6 +490,13 @@ header a {
   .card-recette {
     max-width: 500px;
     margin: auto;
+  }
+  #filters-bloc {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-align: center !important;
+        -ms-flex-align: center !important;
+            align-items: center !important;
   }
 }
 /*# sourceMappingURL=style.css.map */

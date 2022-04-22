@@ -1,38 +1,47 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 
-export function getIdRecipe (event, recipes) {
-  const text = event.target.value
-  let ids = []
+export function getIdRecipe (recipes, allChecked) {
+  const input = document.getElementById('search-bar').value
 
-  // if (text === '') {
-  // }
+  let ids = []
 
   for (let i = 0; i <= recipes.length - 1; i++) {
     const name = recipes[i].name.toLowerCase()
     const descriptionLowerCase = recipes[i].description.toLowerCase()
     // name
-    if (text && name.includes(text.toLowerCase())) {
+    if (input && name.includes(input.toLowerCase())) {
       ids.push(recipes[i].id)
     }
     // description
-    if (text && descriptionLowerCase.includes(text.toLowerCase())) {
+    if (input && descriptionLowerCase.includes(input.toLowerCase())) {
       ids.push(recipes[i].id)
     }
+
+    // tag
+    if (allChecked.length) return filterTag(recipes[i], allChecked)
+
+
     // ingredient
     for (let j = 0; j <= recipes[i].ingredients.length - 1; j++) {
       const ingredientLowerCase = recipes[i].ingredients[j].ingredient.toLowerCase()
-      if (text && ingredientLowerCase.includes(text.toLowerCase())) {
+      if (input && ingredientLowerCase.includes(input.toLowerCase())) {
         ids.push(recipes[i].id)
       }
     }
+    if (input === '' && allChecked.length === 0) {
+      ids.push(recipes[i].id)// à modifier en vieux
+    }
   }
+
   // enelever les doublons
   ids = [...new Set(ids)]
   return ids
 }
 
-export function getGoodRecipe (ids, recipes) {
+// afficher les recettes grâce aux id
+export function getGoodRecipe (recipes, ids) {
+  const input = document.getElementById('search-bar').value
   const recipe = []
   for (let i = 0; i <= recipes.length - 1; i++) {
     for (let j = 0; j <= ids.length - 1; j++) {
@@ -43,7 +52,7 @@ export function getGoodRecipe (ids, recipes) {
           html += `<li>${ingredient.ingredient}: ${ingredient.quantity || ingredient.quantite || ''} ${ingredient.unit || ''}</li>`
         }
         recipe.push(
-          `<div class="card-recette">
+                    `<div class="card-recette">
                 <div class="card-img"></div>
                 <div class="card-text">
 
@@ -68,5 +77,32 @@ export function getGoodRecipe (ids, recipes) {
       }
     }
   }
+  if (ids.length === 0 && input !== '') {
+    recipe.push('<div id="messageRecipe"><p>Aucune recette ne correspond à votre critère... vous pouvez chercher "tarte aux pommes", "poissons"</p></div>')
+  }
   return recipe
+}
+
+
+//  condition tag pour fonction
+function filterTag (obj, allChecked) {
+  const ingredients = allChecked.filter(element => element.color === 'tags-blue')
+  const appareils = allChecked.filter(element => element.color === 'tags-green')
+  const ustensils = allChecked.filter(element => element.color === 'tags-red')
+
+  const conditionIngredients = ingredients.length
+    ? ingredients.every(ingredient => {
+      return obj.ingredients.find(element => element.ingredient.includes(ingredient.item))
+    })
+    : false
+  const conditionAppareils = appareils.every(appareil => {
+    return obj.appliance.includes(appareil.item)
+  })
+  const conditionUstensils = ustensils.length
+    ? ustensils.every(ustensil => {
+      return obj.ustensils.find(element => element.includes(ustensil.item))
+    })
+    : false
+  if ((ingredients.length === 0 || conditionIngredients) && (appareils.length === 0 || conditionAppareils) && (ustensils.length === 0 || conditionUstensils)) return obj.id
+  return 0
 }

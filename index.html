@@ -10,236 +10,75 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
-        rel="stylesheet">
+            href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+            rel="stylesheet">
     <!-- css -->
     <link rel="stylesheet" href="./style/style.css">
     <!-- favicon -->
-    <link rel="icon" type="image/png" href="./img/svg/logo.svg" />
+    <link rel="icon" type="image/png" href="./img/svg/logo.svg"/>
 
 </head>
 
 <body>
-    <header>
-        <a href="#"><img src="./img/svg/logo.svg" alt="Logo"></a>
-        <h1>Les petits plats</h1>
-    </header>
+<header>
+    <a href="#"><img src="./img/svg/logo.svg" alt="Logo"></a>
+    <h1>Les petits plats</h1>
+</header>
 
-    <main>
+<main>
 
-        <div id="search-bar-bloc">
-            <input id="search-bar" type="text" placeholder="Rechercher une recette">
-            <button> <img src="./img/svg/loupe.svg" alt="logo loupe"></button>
+    <div id="search-bar-bloc">
+        <input id="search-bar" type="text" placeholder="Rechercher une recette">
+        <button><img src="./img/svg/loupe.svg" alt="logo loupe"></button>
 
-        </div>
+    </div>
 
-        <div id="filter-container">
-            <div id="tags-bloc"></div>
+    <div id="filter-container">
+        <div id="tags-bloc"></div>
 
-            <div id="filters-bloc">
+        <div id="filters-bloc">
 
-<!-- bouton ingrédient -->
-                <div  id="background-modal"></div>
-                <div class="filter filter-blue">
-                    <div class="filter-header">
-                        <div class="filter-title">Ingredients</div>
-                        <input type="text" placeholder="Rechercher un ingrédient" class="filter-input hide">
-                        <button><img src="./img/svg/down-arrow.svg" alt=""></button>
-                    </div>
-                    <div class="filter-content hide "></div>
+            <!-- bouton ingrédient -->
+            <div id="background-modal"></div>
+            <div class="filter filter-blue">
+                <div class="filter-header">
+                    <div class="filter-title">Ingredients</div>
+                    <input type="text" placeholder="Rechercher un ingrédient" class="filter-input hide">
+                    <button><img src="./img/svg/down-arrow.svg" alt=""></button>
                 </div>
+                <div class="filter-content hide "></div>
+            </div>
 
-<!-- Boutons Appareils -->
-                <div class="filter filter-green">
-                    <div class="filter-header">
-                        <div class="filter-title">Appareils</div>
-                        <input type="text" placeholder="Rechercher un ingrédient" class="filter-input hide">
-                        <button><img src="./img/svg/down-arrow.svg" alt=""></button>
-                    </div>
-                    <div class="filter-content hide "></div>
+            <!-- Boutons Appareils -->
+            <div class="filter filter-green">
+                <div class="filter-header">
+                    <div class="filter-title">Appareils</div>
+                    <input type="text" placeholder="Rechercher un ingrédient" class="filter-input hide">
+                    <button><img src="./img/svg/down-arrow.svg" alt=""></button>
                 </div>
+                <div class="filter-content hide "></div>
+            </div>
 
-<!-- Boutons Ustensiles -->
-                <div class="filter filter-red">
-                    <div class="filter-header">
-                        <div class="filter-title">Ustensiles</div>
-                        <input type="text" placeholder="Rechercher un ingrédient" class="filter-input hide">
-                        <button><img src="./img/svg/down-arrow.svg" alt=""></button>
-                    </div>
-                    <div class="filter-content hide "></div>
+            <!-- Boutons Ustensiles -->
+            <div class="filter filter-red">
+                <div class="filter-header">
+                    <div class="filter-title">Ustensiles</div>
+                    <input type="text" placeholder="Rechercher un ingrédient" class="filter-input hide">
+                    <button><img src="./img/svg/down-arrow.svg" alt=""></button>
                 </div>
+                <div class="filter-content hide "></div>
             </div>
         </div>
+    </div>
 
-<!-- Container des recettes -->
+    <!-- Container des recettes -->
 
-        <div id="recette-card-container">
-
-            <div class="card-recette">
-                <div class="card-img"></div>
-                <div class="card-text">
-
-                    <div class="title-time">
-                        <h4>Limondade de Coco</h4>
-                        <div>
-                            <img src="./img/svg/clock.svg" alt="">
-                            10 min
-                        </div>
-                    </div>
-
-                    <div class="list-text">
-                        <ul>
-                            <li>lait de coucou: <span>400ml</span></li>
-                            <li>lait de coucou: <span>400ml</span></li>
-                            <li>lait de coucou: <span>400ml</span></li>
-                            <li>lait de coucou: <span>400ml</span></li>
-                            <li>lait de coucou: <span>400ml</span></li>
-                        </ul>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum tenetur excepturi ipsa, modi neque rerum distinctio </p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card-recette">
-                <div class="card-img"></div>
-                <div class="card-text">
-
-                    <div class="title-time">
-                        <h4>Limondade de Coco</h4>
-                        <div>
-                            <img src="./img/svg/clock.svg" alt="">
-                            10 min
-                        </div>
-                    </div>
-
-                    <div class="list-text">
-                        <ul>
-                            <li>lait de coucou: <span>400ml</span></li>
-                            <li>lait de coucou: <span>400ml</span></li>
-                            <li>lait de coucou: <span>400ml</span></li>
-                            <li>lait de coucou: <span>400ml</span></li>
-                            <li>lait de coucou: <span>400ml</span></li>
-                        </ul>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum tenetur excepturi ipsa, modi neque rerum distinctio </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-recette">
-                <div class="card-img"></div>
-                <div class="card-text">
-
-                    <div class="title-time">
-                        <h4>Limondade de Coco</h4>
-                        <div>
-                            <img src="./img/svg/clock.svg" alt="">
-                            10 min
-                        </div>
-                    </div>
-
-                    <div class="list-text">
-                        <ul>
-                            <li>lait de coucou: <span>400ml</span></li>
-                            <li>lait de coucou: <span>400ml</span></li>
-                            <li>lait de coucou: <span>400ml</span></li>
-                            <li>lait de coucou: <span>400ml</span></li>
-                            <li>lait de coucou: <span>400ml</span></li>
-                        </ul>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum tenetur excepturi ipsa, modi neque rerum distinctio </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-recette">
-                <div class="card-img"></div>
-                <div class="card-text">
-
-                    <div class="title-time">
-                        <h4>Limondade de Coco</h4>
-                        <div>
-                            <img src="./img/svg/clock.svg" alt="">
-                            10 min
-                        </div>
-                    </div>
-
-                    <div class="list-text">
-                        <ul>
-                            <li>lait de coucou: <span>400ml</span></li>
-                            <li>lait de coucou: <span>400ml</span></li>
-                            <li>lait de coucou: <span>400ml</span></li>
-                            <li>lait de coucou: <span>400ml</span></li>
-                            <li>lait de coucou: <span>400ml</span></li>
-                        </ul>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum tenetur excepturi ipsa, modi neque rerum distinctio </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-recette">
-                <div class="card-img"></div>
-                <div class="card-text">
-
-                    <div class="title-time">
-                        <h4>Limondade de Coco</h4>
-                        <div>
-                            <img src="./img/svg/clock.svg" alt="">
-                            10 min
-                        </div>
-                    </div>
-
-                    <div class="list-text">
-                        <ul>
-                            <li>lait de coucou: <span>400ml</span></li>
-                            <li>lait de coucou: <span>400ml</span></li>
-                            <li>lait de coucou: <span>400ml</span></li>
-                            <li>lait de coucou: <span>400ml</span></li>
-                            <li>lait de coucou: <span>400ml</span></li>
-                        </ul>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum tenetur excepturi ipsa, modi neque rerum distinctio </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-recette">
-                <div class="card-img"></div>
-                <div class="card-text">
-
-                    <div class="title-time">
-                        <h4>Limondade de Coco</h4>
-                        <div>
-                            <img src="./img/svg/clock.svg" alt="">
-                            10 min
-                        </div>
-                    </div>
-
-                    <div class="list-text">
-                        <ul>
-                            <li>lait de coucou: <span>400ml</span></li>
-                            <li>lait de coucou: <span>400ml</span></li>
-                            <li>lait de coucou: <span>400ml</span></li>
-                            <li>lait de coucou: <span>400ml</span></li>
-                            <li>lait de coucou: <span>400ml</span></li>
-                        </ul>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum tenetur excepturi ipsa, modi neque rerum distinctio </p>
-                    </div>
-                </div>
-            </div>
-
-            
-
-        </div>
+    <div id="recette-card-container">
+    </div>
 
 
-
-
-
-
-
-
-
-
-    </main>
-    <script type="module" src="./scripts/index.js"></script>
+</main>
+<script type="module" src="./scripts/index.js"></script>
 </body>
 
 </html>

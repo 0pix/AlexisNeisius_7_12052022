@@ -55,8 +55,7 @@ export function openAllFilters (number, buttonsFilters) {
   }
 }
 
-/** *************|Background Modal|***************/
-
+/** *************|Background Modal pour close le bouton avec un event|***************/
 export function closeFilterFromBack (number, buttonsFilters) {
   const button = buttonsFilters[number].querySelector('button')
   const filterInput = buttonsFilters[number].querySelector('.filter-input')

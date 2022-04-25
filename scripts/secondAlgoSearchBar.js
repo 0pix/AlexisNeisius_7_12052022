@@ -1,10 +1,10 @@
-export function getIdRecipe2 (recipes, allChecked) {
-  // const text = event?.target.value
+export function getIdRecipe (recipes, allChecked) {
   const input = document.getElementById('search-bar').value
 
   let ids = recipes.map(obj => {
     const name = obj.name.toLowerCase()
     const descriptionLowerCase = obj.description.toLowerCase()
+
     // name
     if (input && name.includes(input.toLowerCase())) {
       return obj.id
@@ -16,7 +16,9 @@ export function getIdRecipe2 (recipes, allChecked) {
     }
 
     // tag
-    if (allChecked.length) return filterTag(obj, allChecked)
+    if (allChecked.length) {
+      return filterTag(obj, allChecked)
+    }
 
     // ingredient
     const myingredient = obj.ingredients.filter(object => {
@@ -26,23 +28,28 @@ export function getIdRecipe2 (recipes, allChecked) {
       }
       return false
     })
+
     // return input && ingredientLowerCase.includes(input.toLowerCase())
     if (myingredient.length > 0) {
       return obj.id
     }
+
+    console.log('coucou')
   }).filter(id => id !== undefined)
 
+  // afficher toutes les recettes quand tout est vide
   if (input === '' && allChecked.length === 0) {
     ids = recipes.map(obj => obj.id)
   }
 
   // enelever les doublons
   ids = [...new Set(ids)]
+  console.log(ids)
   return ids
 }
 
 // afficher les recettes grâce aux id
-export function getGoodRecipe2 (recipes, ids) {
+export function getGoodRecipe (recipes, ids) {
   // const input = event?.target.value
   const input = document.getElementById('search-bar').value
   const goodRecipe = []
@@ -85,7 +92,7 @@ export function getGoodRecipe2 (recipes, ids) {
   return goodRecipe
 }
 
-//  condition tag pour fonction
+//  condition tag pour fonction getIdRecipe2
 function filterTag (obj, allChecked) {
   const ingredients = allChecked.filter(element => element.color === 'tags-blue')
   const appareils = allChecked.filter(element => element.color === 'tags-green')
@@ -108,35 +115,3 @@ function filterTag (obj, allChecked) {
   if ((ingredients.length === 0 || conditionIngredients) && (appareils.length === 0 || conditionAppareils) && (ustensils.length === 0 || conditionUstensils)) return obj.id
   return 0
 }
-
-// function filterTag (obj, allChecked) {
-//   const ingredients = allChecked.filter(element => element.color === 'tags-blue')
-//   const appareils = allChecked.filter(element => element.color === 'tags-green')
-//   const ustensils = allChecked.filter(element => element.color === 'tags-red')
-
-//   const conditionIngredients = ingredients.length
-//     ? ingredients.every(ingredient => {
-//       return obj.ingredients.find(element => element.ingredient.includes(ingredient.item))
-//     })
-//     : false
-//   const conditionAppareils = appareils.every(appareil => {
-//     return obj.appliance.includes(appareil.item)
-//   })
-//   const conditionUstensils = ustensils.length
-//     ? ustensils.every(ustensil => {
-//       return obj.ustensils.find(element => element.includes(ustensil.item))
-//     })
-//     : false
-//   if ((ingredients.length === 0 || conditionIngredients) && (appareils.length === 0 || conditionAppareils) && (ustensils.length === 0 || conditionUstensils)) return obj.id
-//   return 0
-// }
-
-// Not Supported in IE 9-11
-// const arr1 = ['pizza', 'cola'];
-// const arr2 = ['pizza', 'cake', 'cola'];
-
-// const containsAll = arr1.every(element => {
-//   return arr2.includes(element);
-// });
-
-// console.log(containsAll); // 👉 true

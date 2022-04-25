@@ -35,11 +35,10 @@
 
     <div id="filter-container">
         <div id="tags-bloc"></div>
-
         <div id="filters-bloc">
 
             <!-- bouton ingrédient -->
-            <div id="background-modal"></div>
+            <!-- <div id="background-modal"></div>
             <div class="filter filter-blue">
                 <div class="filter-header">
                     <div class="filter-title">Ingredients</div>
@@ -47,27 +46,40 @@
                     <button><img src="./img/svg/down-arrow.svg" alt=""></button>
                 </div>
                 <div class="filter-content hide "></div>
+            </div> -->
+            <div id="background-blue" class="background-modal hide"></div>
+            <div id ="blue-filter" class="button-filter">
+                <div class="header">
+                    <p id="blue-title">Ingrédient</p>
+                    <input type="text" placeholder="Rechercher un ingrédient" id="blue-input" class="filter-input hide">
+                    <button></button>
+                </div>
+                <div id="blue-content" class="bottom hide"></div>
             </div>
 
             <!-- Boutons Appareils -->
-            <div class="filter filter-green">
-                <div class="filter-header">
-                    <div class="filter-title">Appareils</div>
-                    <input type="text" placeholder="Rechercher un ingrédient" class="filter-input hide">
-                    <button><img src="./img/svg/down-arrow.svg" alt=""></button>
+            <div id="background-green" class="background-modal hide"></div>
+            <div id ="green-filter" class="button-filter">
+                <div class="header">
+                    <p id="green-title">Appareils</p>
+                    <input type="text" placeholder="Rechercher un ingrédient" id="green-input" class="filter-input hide">
+                    <button></button>
                 </div>
-                <div class="filter-content hide "></div>
+                <div id="green-content" class="bottom hide"></div>
             </div>
+            
 
             <!-- Boutons Ustensiles -->
-            <div class="filter filter-red">
-                <div class="filter-header">
-                    <div class="filter-title">Ustensiles</div>
-                    <input type="text" placeholder="Rechercher un ingrédient" class="filter-input hide">
-                    <button><img src="./img/svg/down-arrow.svg" alt=""></button>
+            <div id="background-red" class="background-modal hide"></div>
+            <div id ="red-filter" class="button-filter">
+                <div class="header">
+                    <p id="red-title">Ustensiles</p>
+                    <input type="text" placeholder="Rechercher un ingrédient" id="red-input" class="filter-input hide">
+                    <button></button>
                 </div>
-                <div class="filter-content hide "></div>
+                <div id="red-content" class="bottom hide"></div>
             </div>
+            
         </div>
     </div>
 

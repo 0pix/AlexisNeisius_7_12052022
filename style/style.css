@@ -105,11 +105,226 @@ header a {
   border-radius: 5px;
 }
 
-#filter-container {
-  width: 100%;
+/*****************************************/
+.button-filter {
+  background-color: #656f7e;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  border-radius: 3px;
+  margin-right: 20px;
 }
 
-#filter-container #tags-bloc {
+.button-filter input {
+  background-color: transparent;
+  border: none;
+  width: 100%;
+  max-width: 175px;
+  height: 30px;
+  padding: 0 5px;
+  font-size: 20px;
+  caret-color: white;
+  outline: none;
+  position: relative;
+  color: white;
+}
+
+.button-filter input::-webkit-input-placeholder {
+  color: white;
+  opacity: 0.5;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.button-filter input:-ms-input-placeholder {
+  color: white;
+  opacity: 0.5;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.button-filter input::-ms-input-placeholder {
+  color: white;
+  opacity: 0.5;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.button-filter input::placeholder {
+  color: white;
+  opacity: 0.5;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+#blue-filter {
+  background-color: #3282F7;
+}
+
+#green-filter {
+  background-color: #68D9A4;
+}
+
+#red-filter {
+  background-color: #ED6454;
+}
+
+.header {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 15px 10px 15px 10px;
+  color: white;
+  gap: 20px;
+}
+
+.header button {
+  background-image: url(../../../img/svg/fleche.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  width: 15px;
+  height: 15px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.bottom {
+  width: 100%;
+  height: 300px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
+  color: white;
+  overflow-x: auto;
+  font-size: 0.7em;
+  overflow-x: hidden;
+}
+
+.test {
+  width: 150px;
+  height: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: 5px;
+}
+
+.hide {
+  display: none;
+}
+
+.rotateBtn {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.test {
+  height: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 14px;
+}
+
+.test label {
+  color: rgba(255, 255, 255, 0.534);
+}
+
+.test label:hover {
+  background-color: #5095fd;
+}
+
+.filter-input::-webkit-input-placeholder {
+  color: white;
+  opacity: 0.5;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.filter-input:-ms-input-placeholder {
+  color: white;
+  opacity: 0.5;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.filter-input::-ms-input-placeholder {
+  color: white;
+  opacity: 0.5;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.filter-input::placeholder {
+  color: white;
+  opacity: 0.5;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.grid-column-1 {
+  -ms-grid-columns: (1fr)[1];
+      grid-template-columns: repeat(1, 1fr);
+}
+
+.grid-column-2 {
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-column-3 {
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
+}
+
+.index999 {
+  z-index: 999;
+}
+
+/*****************************************/
+#tags-bloc {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -117,10 +332,11 @@ header a {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   gap: 10px;
-  margin-top: 20px;
+  min-height: 30px;
+  padding: 15px 0;
 }
 
-#filter-container #tags-bloc .tags {
+#tags-bloc .tags {
   padding: 10px 15px;
   background-color: red;
   display: -webkit-box;
@@ -137,19 +353,19 @@ header a {
   gap: 10px;
 }
 
-#filter-container #tags-bloc .tags.tags-blue {
+#tags-bloc .tags.tags-blue {
   background-color: #3282F7;
 }
 
-#filter-container #tags-bloc .tags.tags-green {
+#tags-bloc .tags.tags-green {
   background-color: #68D9A4;
 }
 
-#filter-container #tags-bloc .tags.tags-red {
+#tags-bloc .tags.tags-red {
   background-color: #ED6454;
 }
 
-#filter-container #tags-bloc .tags .tags-text {
+#tags-bloc .tags .tags-text {
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
@@ -157,7 +373,7 @@ header a {
   color: white;
 }
 
-#filter-container #tags-bloc .tags button {
+#tags-bloc .tags button {
   background-color: transparent;
   border: none;
   display: -webkit-box;
@@ -168,12 +384,16 @@ header a {
           align-items: center;
 }
 
-#filter-container #tags-bloc .tags button img {
+#tags-bloc .tags button img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
   cursor: pointer;
+}
+
+#filter-container {
+  width: 100%;
 }
 
 #filter-container #filters-bloc {
@@ -191,6 +411,7 @@ header a {
   line-height: 17px;
   color: white;
   z-index: 100;
+  padding: 0px 0px 30px 0px;
 }
 
 #filter-container #filters-bloc .background-modal {
@@ -238,6 +459,7 @@ header a {
 }
 
 #filter-container #filters-bloc .filter .filter-header {
+  background-color: darkmagenta;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -260,56 +482,6 @@ header a {
   cursor: pointer;
 }
 
-#filter-container #filters-bloc .filter .filter-header .filter-input {
-  background-color: transparent;
-  border: none;
-  width: 100%;
-  max-width: 175px;
-  height: 30px;
-  padding: 0 5px;
-  font-size: 20px;
-  caret-color: white;
-  outline: none;
-  position: relative;
-  color: white;
-}
-
-#filter-container #filters-bloc .filter .filter-header .filter-input::-webkit-input-placeholder {
-  color: white;
-  opacity: 0.5;
-  font-family: Lato;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 12px;
-}
-
-#filter-container #filters-bloc .filter .filter-header .filter-input:-ms-input-placeholder {
-  color: white;
-  opacity: 0.5;
-  font-family: Lato;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 12px;
-}
-
-#filter-container #filters-bloc .filter .filter-header .filter-input::-ms-input-placeholder {
-  color: white;
-  opacity: 0.5;
-  font-family: Lato;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 12px;
-}
-
-#filter-container #filters-bloc .filter .filter-header .filter-input::placeholder {
-  color: white;
-  opacity: 0.5;
-  font-family: Lato;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 12px;
-}
-
 #filter-container #filters-bloc .filter .filter-content {
   display: -ms-grid;
   display: grid;
@@ -317,60 +489,6 @@ header a {
   padding: 0 15px;
   margin-bottom: 15px;
   overflow: auto;
-}
-
-#filter-container #filters-bloc .filter .filter-content .test {
-  height: 30px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  font-size: 14px;
-}
-
-#filter-container #filters-bloc .filter .filter-content .test label {
-  color: rgba(255, 255, 255, 0.534);
-}
-
-#filter-container #filters-bloc .filter .filter-content .test label:hover {
-  background-color: #5095fd;
-}
-
-#filter-container #filters-bloc .filter.index999 {
-  z-index: 999;
-}
-
-#filter-container #filters-bloc .filter.filter-blue {
-  background-color: #3282F7;
-}
-
-#filter-container #filters-bloc .filter.filter-green {
-  background-color: #68D9A4;
-}
-
-#filter-container #filters-bloc .filter.filter-red {
-  background-color: #ED6454;
-}
-
-#filter-container .hide {
-  display: none !important;
-}
-
-#filter-container .grid-column-1 {
-  -ms-grid-columns: 100%;
-      grid-template-columns: 100%;
-}
-
-#filter-container .grid-column-2 {
-  -ms-grid-columns: 50% 50%;
-      grid-template-columns: 50% 50%;
-}
-
-#filter-container .grid-column-3 {
-  -ms-grid-columns: 33% 33% 33%;
-      grid-template-columns: 33% 33% 33%;
 }
 
 #recette-card-container {
@@ -381,7 +499,6 @@ header a {
   -ms-grid-columns: (1fr)[3];
       grid-template-columns: repeat(3, 1fr);
   gap: 30px;
-  padding: 10px 0;
 }
 
 #recette-card-container .card-recette {

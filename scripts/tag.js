@@ -72,12 +72,11 @@ function cleanDataTag (data) {
 }
 
 /** *************|barre de recherche des tags|***************/
-export function searchBarTag (number, data) {
-  const input = document.querySelectorAll('.filter-input')
+export function searchBarTag (input, data) {
   let newtag = []
-  if (input[number].value !== '') {
+  if (input.value !== '') {
     newtag = data.filter((elt) =>
-      elt.toLowerCase().includes(input[number].value.toLowerCase())
+      elt.toLowerCase().includes(input.value.toLowerCase())
     )
   }
   return newtag
@@ -86,15 +85,14 @@ export function searchBarTag (number, data) {
 //= ========================================================================================//
 
 /** *************|Afficher les tags dans bouton|***************/
-export function innertTags (target, number, data1, data2, classCss) {
-  const input = document.querySelectorAll('.filter-input')
+export function innertTags (target, input, data1, data2, classCss) {
   let data = []
-  if (input[number].value === '') {
+  if (input.value === '') {
     data = data1
   } else {
     data = data2
   }
-  target[number].innerHTML = data
+  target.innerHTML = data
     .map(
       (ingredient) =>
                 `
@@ -122,7 +120,6 @@ export function getTagChecked () {
     }
   })
   allChecked.sort()
-  console.log(allChecked);
   return allChecked
 }
 

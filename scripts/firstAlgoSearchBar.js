@@ -21,7 +21,6 @@ export function getIdRecipe (recipes, allChecked) {
     // tag
     if (allChecked.length) return filterTag(recipes[i], allChecked)
 
-
     // ingredient
     for (let j = 0; j <= recipes[i].ingredients.length - 1; j++) {
       const ingredientLowerCase = recipes[i].ingredients[j].ingredient.toLowerCase()
@@ -82,7 +81,6 @@ export function getGoodRecipe (recipes, ids) {
   }
   return recipe
 }
-
 
 //  condition tag pour fonction
 function filterTag (obj, allChecked) {

@@ -2,9 +2,9 @@
 /* eslint-disable no-unused-vars */
 // import { get } from 'fast-levenshtein'
 import { recipes } from './../data/recipes.js'
-import { getIdRecipe2, getGoodRecipe2 } from './../scripts/secondAlgoSearchBar.js'
-import { getIdRecipe, getGoodRecipe } from './../scripts/firstAlgoSearchBar.js'
-import { openAllFilters, setCollumnFromBar, closeFilterFromBack } from './../scripts/button-filter.js'
+// import { getIdRecipe, getGoodRecipe } from './../scripts/firstAlgoSearchBar.js'     // algo 1
+import { getIdRecipe, getGoodRecipe } from './../scripts/secondAlgoSearchBar.js' // algo 2
+import { setCollumnFromBar } from './../scripts/button-filter.js'
 import {
   getIngregdientForTag,
   getDevicesForTag,
@@ -16,12 +16,30 @@ import {
   TagsOnTop
 } from './../scripts/tag.js'
 
-const buttonsFilters = document.querySelectorAll('.filter')
-const filterContent = document.querySelectorAll('.filter-content')
-const filterBlocs = document.getElementById('filters-bloc')
+// first input
 const searchBar = document.getElementById('search-bar')
-const input = document.querySelectorAll('.filter-input')
-const arrowBtn = filterBlocs.querySelectorAll('button')
+// blue DOM
+const blueFilter = document.getElementById('blue-filter')
+const blueButton = blueFilter.querySelector('button')
+const blueContent = document.getElementById('blue-content')
+const blueInput = document.getElementById('blue-input')
+const blueTitle = document.getElementById('blue-title')
+const blueModal = document.getElementById('background-blue')
+// green DOM
+const greenFilter = document.getElementById('green-filter')
+const greenbutton = greenFilter.querySelector('button')
+const greenContent = document.getElementById('green-content')
+const greenInput = document.getElementById('green-input')
+const greenTitle = document.getElementById('green-title')
+const greenModal = document.getElementById('background-green')
+// red DOM
+const redFilter = document.getElementById('red-filter')
+const redButton = redFilter.querySelector('button')
+const redContent = document.getElementById('red-content')
+const redInput = document.getElementById('red-input')
+const redTitle = document.getElementById('red-title')
+const redModal = document.getElementById('background-red')
+// Data
 const data = {
   ingrediensFiltered: [],
   ingrediensSearchBar: [],
@@ -34,36 +52,13 @@ const data = {
   checkedAll: []
 }
 
-// afficher les recettes dans le container/grille
-function recipeOnGrid () {
-  const gridCard = document.getElementById('recette-card-container')
-  gridCard.innerHTML = data.goodRecipe.join('')
-}
-
-// /** *************|Barre de recherche algo 1|***************/
-
-// searchBar.addEventListener('keydown', function (event) {
-//   showRecipeGrid(event)
-// })
-
-// searchBar.addEventListener('keyup', function (event) {
-//   showRecipeGrid(event)
-// })
-
-// function showRecipeGrid (event) {
-//   if (event.code === 'Backspace' && event.target.value === '') {
-//     event = null
-//   }
-//   data.goodIds = getIdRecipe(recipes, data.checkedAll)
-//   data.goodRecipe = getGoodRecipe(recipes, data.goodIds)
-//   recipeOnGrid()
-// }
-
-/** *************|Barre de recherche principal algo 2|***************/
+/** *************|Barre de recherche principal algo |***************/
+// écrire dans la principale barre de recherche
 searchBar.addEventListener('keydown', function (event) {
   showRecipeGrid(event)
 })
 
+// écrire dans la principale barre de recherche
 searchBar.addEventListener('keyup', function (event) {
   showRecipeGrid(event)
 })
@@ -72,9 +67,15 @@ function showRecipeGrid (event) {
   if (event.code === 'Backspace' && event.target.value === '') {
     event = null
   }
-  data.goodIds = getIdRecipe2(recipes, data.checkedAll)
-  data.goodRecipe = getGoodRecipe2(recipes, data.goodIds)
+  data.goodIds = getIdRecipe(recipes, data.checkedAll)
+  data.goodRecipe = getGoodRecipe(recipes, data.goodIds)
   recipeOnGrid()
+}
+
+// afficher les recettes dans le container/grille
+function recipeOnGrid () {
+  const gridCard = document.getElementById('recette-card-container')
+  gridCard.innerHTML = data.goodRecipe.join('')
 }
 
 /** *************|Filters|***************/
@@ -82,93 +83,124 @@ function init () {
   data.ingrediensFiltered = getIngregdientForTag(recipes) // récuperer tout les ingrédients
   data.devicesFiltered = getDevicesForTag(recipes) // récuperer tout les appareils
   data.utensilsFiltered = getUtensilsForTag(recipes) // récuperer tout les ustentils
-  innertTags(filterContent, 0, data.ingrediensFiltered, data.ingrediensSearchBar, 'tags-blue')// afficher les ingrédients dans le boutons
-  innertTags(filterContent, 1, data.devicesFiltered, data.devicesSearchBar, 'tags-green') // afficher les appareils dans le boutons
-  innertTags(filterContent, 2, data.utensilsFiltered, data.utensilsSearchBar, 'tags-red')// afficher les appareils dans le boutons
-  data.goodIds = getIdRecipe2(recipes, data.checkedAll)
-  data.goodRecipe = getGoodRecipe2(recipes, data.goodIds)
+  data.goodIds = getIdRecipe(recipes, data.checkedAll)
+  data.goodRecipe = getGoodRecipe(recipes, data.goodIds)
   recipeOnGrid()
+  data.checkedAll = getTagChecked()
 }
 init()
 
-// ouverture des boutons filter
-arrowBtn[0].addEventListener('click', () => {
-  setCollumnFromBar(0, buttonsFilters)
-  openAllFilters(0, buttonsFilters)
-  innertTags(filterContent, 0, data.ingrediensFiltered, data.ingrediensSearchBar, 'tags-blue')// afficher les ingrédients dans le boutons
-})
-arrowBtn[1].addEventListener('click', () => {
-  setCollumnFromBar(1, buttonsFilters)
-  openAllFilters(1, buttonsFilters)
-  innertTags(filterContent, 1, data.devicesFiltered, data.devicesSearchBar, 'tags-green') // afficher les appareils dans le boutons
-})
-arrowBtn[2].addEventListener('click', () => {
-  setCollumnFromBar(2, buttonsFilters)
-  openAllFilters(2, buttonsFilters)
-  innertTags(filterContent, 2, data.utensilsFiltered, data.utensilsSearchBar, 'tags-red')// afficher les appareils dans le boutons
+// innert les tags dans les boutons
+innertTags(blueContent, blueInput, data.ingrediensFiltered, data.ingrediensSearchBar, 'tags-blue')
+innertTags(greenContent, greenInput, data.devicesFiltered, data.devicesSearchBar, 'tags-green')
+innertTags(redContent, redInput, data.utensilsFiltered, data.utensilsSearchBar, 'tags-red')
+
+// clic sur bouton flêche Ingrédients (ouverture/fermeture)
+blueButton.addEventListener('click', () => {
+  blueContent.classList.toggle('hide')
+  blueInput.classList.toggle('hide')
+  blueTitle.classList.toggle('hide')
+  blueButton.classList.toggle('rotateBtn')
+  blueFilter.classList.toggle('index999')
+  blueModal.classList.toggle('hide')
+  setCollumnFromBar(blueInput, data.ingrediensFiltered, data.ingrediensSearchBar, blueContent)
 })
 
-// overture et fermeture de la modal qui permet de fermer les boutons filter en cliquant en dehors de la zone
-document.addEventListener('click', function (e) {
-  if (e.target.parentNode.parentNode.classList.contains('filter-header')) {
-    const background = document.getElementById('background-modal')
-    background.classList.toggle('background-modal')
-    e.target.parentNode.parentNode.parentNode.classList.toggle('index999')
-  }
-  // close with click on background modal
-  if (e.target.id === 'background-modal') {
-    const background = document.getElementById('background-modal')
-    background.classList.remove('background-modal')
-    buttonsFilters.forEach(valeur => {
-      valeur.classList.remove('index999')
-    })
-    closeFilterFromBack(0, buttonsFilters)
-    closeFilterFromBack(1, buttonsFilters)
-    closeFilterFromBack(2, buttonsFilters)
-  }
+// clic sur bouton flêche Appareils (ouverture/fermeture)
+greenbutton.addEventListener('click', () => {
+  greenContent.classList.toggle('hide')
+  greenInput.classList.toggle('hide')
+  greenTitle.classList.toggle('hide')
+  greenbutton.classList.toggle('rotateBtn')
+  greenFilter.classList.toggle('index999')
+  greenModal.classList.toggle('hide')
+  setCollumnFromBar(greenInput, data.devicesFiltered, data.devicesSearchBar, greenContent)
 })
 
-// barre de recherche indrédients
-input[0].addEventListener('keyup', () => {
-  data.ingrediensSearchBar = searchBarTag(0, data.ingrediensFiltered)
-  innertTags(filterContent, 0, data.ingrediensFiltered, data.ingrediensSearchBar, 'tags-blue')
-  setCollumnFromBar(0, buttonsFilters)
+// clic sur bouton flêche ingrédients (ouverture/fermeture)
+redButton.addEventListener('click', () => {
+  redContent.classList.toggle('hide')
+  redInput.classList.toggle('hide')
+  redTitle.classList.toggle('hide')
+  redButton.classList.toggle('rotateBtn')
+  redFilter.classList.toggle('index999')
+  redModal.classList.toggle('hide')
+  setCollumnFromBar(redInput, data.utensilsFiltered, data.utensilsSearchBar, redContent)
 })
 
-// barre de recherche appareils
-input[1].addEventListener('keyup', () => {
-  data.devicesSearchBar = searchBarTag(1, data.devicesFiltered)
-  innertTags(filterContent, 1, data.devicesFiltered, data.devicesSearchBar, 'tags-green')
-  setCollumnFromBar(1, buttonsFilters)
+// fermer bouton bleue en cliquant sur le modal de fond
+blueModal.addEventListener('click', () => {
+  blueContent.classList.toggle('hide')
+  blueInput.classList.toggle('hide')
+  blueTitle.classList.toggle('hide')
+  blueButton.classList.toggle('rotateBtn')
+  blueFilter.classList.toggle('index999')
+  blueModal.classList.toggle('hide')
+  setCollumnFromBar(blueInput, data.ingrediensFiltered, data.ingrediensSearchBar, blueContent)
 })
 
-// barre de recherche ustensils
-input[2].addEventListener('keyup', () => {
-  data.utensilsSearchBar = searchBarTag(2, data.utensilsFiltered)
-  innertTags(filterContent, 2, data.utensilsFiltered, data.utensilsSearchBar, 'tags-red')
-  setCollumnFromBar(2, buttonsFilters)
+// fermer bouton bleue en cliquant sur le modal de fond
+greenModal.addEventListener('click', () => {
+  greenContent.classList.toggle('hide')
+  greenInput.classList.toggle('hide')
+  greenTitle.classList.toggle('hide')
+  greenbutton.classList.toggle('rotateBtn')
+  greenFilter.classList.toggle('index999')
+  greenModal.classList.toggle('hide')
+  setCollumnFromBar(greenInput, data.devicesFiltered, data.devicesSearchBar, greenContent)
 })
 
-// tags top
+// fermer bouton bleue en cliquant sur le modal de fond
+redModal.addEventListener('click', () => {
+  redContent.classList.toggle('hide')
+  redInput.classList.toggle('hide')
+  redTitle.classList.toggle('hide')
+  redButton.classList.toggle('rotateBtn')
+  redFilter.classList.toggle('index999')
+  redModal.classList.toggle('hide')
+  setCollumnFromBar(redInput, data.utensilsFiltered, data.utensilsSearchBar, redContent)
+})
+
+// clic sur text tag (all)
 document.addEventListener('click', function (event) {
   if (event.target.parentNode.classList.contains('tag')) {
-    // console.log(event.target.parentNode.classList)
     data.checkedAll = getTagChecked()
     TagsOnTop(data.checkedAll)
-    data.goodIds = getIdRecipe2(recipes, data.checkedAll)
-    data.goodRecipe = getGoodRecipe2(recipes, data.goodIds)
+    data.goodIds = getIdRecipe(recipes, data.checkedAll)
+    data.goodRecipe = getGoodRecipe(recipes, data.goodIds)
     recipeOnGrid()
   }
 })
 
-// Remove tags from top
+// clic sur petite croix tag (Remove tags from top)
 document.addEventListener('click', function (event) {
   if (event.target.classList.contains('closeBtnTag')) {
     uncheckTag(event)
     data.checkedAll = getTagChecked()
     TagsOnTop(data.checkedAll)
-    data.goodIds = getIdRecipe2(recipes, data.checkedAll)
-    data.goodRecipe = getGoodRecipe2(recipes, data.goodIds)
+    data.goodIds = getIdRecipe(recipes, data.checkedAll)
+    data.goodRecipe = getGoodRecipe(recipes, data.goodIds)
     recipeOnGrid()
   }
+})
+
+// barre de recherche indrédients
+blueInput.addEventListener('keyup', () => {
+  data.ingrediensSearchBar = searchBarTag(blueInput, data.ingrediensFiltered)
+  innertTags(blueContent, blueInput, data.ingrediensFiltered, data.ingrediensSearchBar, 'tags-blue')
+  setCollumnFromBar(blueInput, data.ingrediensFiltered, data.ingrediensSearchBar, blueContent)
+})
+
+// barre de recherche appareils
+greenInput.addEventListener('keyup', () => {
+  data.devicesSearchBar = searchBarTag(greenInput, data.devicesFiltered)
+  innertTags(greenContent, greenInput, data.devicesFiltered, data.devicesSearchBar, 'tags-green')
+  setCollumnFromBar(greenInput, data.devicesFiltered, data.devicesSearchBar, greenContent)
+})
+
+// barre de recherche ustensils
+redInput.addEventListener('keyup', () => {
+  data.utensilsSearchBar = searchBarTag(redInput, data.utensilsFiltered)
+  innertTags(redContent, redInput, data.utensilsFiltered, data.utensilsSearchBar, 'tags-red')
+  setCollumnFromBar(redInput, data.utensilsFiltered, data.utensilsSearchBar, redContent)
 })

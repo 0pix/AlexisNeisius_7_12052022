@@ -1,41 +1,69 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 
-export function getIdRecipe (recipes, allChecked) {
+export function getRecipes (recipes, recipesFiltered, allChecked) {
   const input = document.getElementById('search-bar').value
 
-  let ids = []
+  let recipe = []
 
   for (let i = 0; i <= recipes.length - 1; i++) {
     const name = recipes[i].name.toLowerCase()
     const descriptionLowerCase = recipes[i].description.toLowerCase()
-    // name
-    if (input && name.includes(input.toLowerCase())) {
-      ids.push(recipes[i].id)
-    }
+
     // description
     if (input && descriptionLowerCase.includes(input.toLowerCase())) {
-      ids.push(recipes[i].id)
+      recipe.push(recipes[i])
     }
 
-    // tag
-    if (allChecked.length) return filterTag(recipes[i], allChecked)
+    // name
+    if (input && name.includes(input.toLowerCase())) {
+      recipe.push(recipes[i])
+    }
 
     // ingredient
+    const myingredient = []
     for (let j = 0; j <= recipes[i].ingredients.length - 1; j++) {
-      const ingredientLowerCase = recipes[i].ingredients[j].ingredient.toLowerCase()
+      const ingredientLowerCase =
+        recipes[i].ingredients[j].ingredient.toLowerCase()
       if (input && ingredientLowerCase.includes(input.toLowerCase())) {
-        ids.push(recipes[i].id)
+        myingredient.push(recipes[i])
       }
     }
-    if (input === '' && allChecked.length === 0) {
-      ids.push(recipes[i].id)// à modifier en vieux
+
+    if (myingredient.length > 0) {
+      recipe.push(recipes[i])
     }
   }
 
-  // enelever les doublons
-  ids = [...new Set(ids)]
-  return ids
+  /** *************||***************/
+
+  // afficher toutes les recettes quand tout est vide
+  if (input === '' && recipe.length === 0) {
+    recipe = recipes
+  }
+
+  // tag
+  let recipeTag = []
+  for (let h = 0; h <= recipe.length - 1; h++) {
+    if (allChecked.length) {
+      console.log(filterTag(recipe[h], allChecked))
+      const test = filterTag(recipe[h], allChecked)
+      if (test === true) {
+        recipeTag.push(recipe[h])
+      }
+    } else {
+      recipeTag.push(recipe[h])
+    }
+  }
+
+  console.log('recipeTag', recipeTag)
+  recipeTag = [...new Set(recipeTag)]
+
+  // afficher toutes les recettes quand tout est vide
+  if (input === '' && allChecked.length === 0) {
+    return recipes
+  }
+  return recipeTag
 }
 
 // afficher les recettes grâce aux id
@@ -44,14 +72,17 @@ export function getGoodRecipe (recipes, ids) {
   const recipe = []
   for (let i = 0; i <= recipes.length - 1; i++) {
     for (let j = 0; j <= ids.length - 1; j++) {
-      if (recipes[i].id === ids[j]) {
+      if (recipes[i].id === ids[j].id) {
         let html = ''
-        for (let k = 0; k <= recipes[i].ingredients.length - 1; k++) { // boucle sur les ingrédients à afficher
+        for (let k = 0; k <= recipes[i].ingredients.length - 1; k++) {
+          // boucle sur les ingrédients à afficher
           const ingredient = recipes[i].ingredients[k]
-          html += `<li>${ingredient.ingredient}: ${ingredient.quantity || ingredient.quantite || ''} ${ingredient.unit || ''}</li>`
+          html += `<li>${ingredient.ingredient}: ${
+            ingredient.quantity || ingredient.quantite || ''
+          } ${ingredient.unit || ''}</li>`
         }
         recipe.push(
-                    `<div class="card-recette">
+          `<div class="card-recette">
                 <div class="card-img"></div>
                 <div class="card-text">
 
@@ -77,7 +108,9 @@ export function getGoodRecipe (recipes, ids) {
     }
   }
   if (ids.length === 0 && input !== '') {
-    recipe.push('<div id="messageRecipe"><p>Aucune recette ne correspond à votre critère... vous pouvez chercher "tarte aux pommes", "poissons"</p></div>')
+    recipe.push(
+      '<div id="messageRecipe"><p>Aucune recette ne correspond à votre critère... vous pouvez chercher "tarte aux pommes", "poissons"</p></div>'
+    )
   }
   return recipe
 }
@@ -88,19 +121,19 @@ function filterTag (obj, allChecked) {
   const appareils = allChecked.filter(element => element.color === 'tags-green')
   const ustensils = allChecked.filter(element => element.color === 'tags-red')
 
-  const conditionIngredients = ingredients.length
-    ? ingredients.every(ingredient => {
-      return obj.ingredients.find(element => element.ingredient.includes(ingredient.item))
-    })
-    : false
+  const conditionIngredients =
+     ingredients.every(ingredient => {
+       return obj.ingredients.find(element => element.ingredient.toLowerCase() === ingredient.item.toLowerCase() + 's' || ingredient.item.toLowerCase() === element.ingredient.toLowerCase() + 's' || ingredient.item.toLowerCase() === element.ingredient.toLowerCase())
+     })
+
   const conditionAppareils = appareils.every(appareil => {
-    return obj.appliance.includes(appareil.item)
+    return obj.appliance.toLowerCase().includes(appareil.item.toLowerCase())
   })
-  const conditionUstensils = ustensils.length
-    ? ustensils.every(ustensil => {
-      return obj.ustensils.find(element => element.includes(ustensil.item))
-    })
-    : false
-  if ((ingredients.length === 0 || conditionIngredients) && (appareils.length === 0 || conditionAppareils) && (ustensils.length === 0 || conditionUstensils)) return obj.id
-  return 0
+
+  const conditionUstensils =
+     ustensils.every(ustensil => {
+       return obj.ustensils.find(element => element.toLowerCase() === ustensil.item.toLowerCase() + 's' || ustensil.item.toLowerCase() === element.toLowerCase() + 's' || ustensil.item.toLowerCase() === element.toLowerCase())
+     })
+
+  return !!((ingredients.length === 0 || conditionIngredients) && (appareils.length === 0 || conditionAppareils) && (ustensils.length === 0 || conditionUstensils))
 }

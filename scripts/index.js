@@ -3,7 +3,6 @@
 // import { get } from 'fast-levenshtein'
 import { recipes } from './../data/recipes.js'
 import { getGoodRecipe, getRecipes } from './../scripts/firstAlgoSearchBar.js' // algo 1
-// import { getIdRecipe, getGoodRecipe, getRecipes } from './../scripts/secondAlgoSearchBar.js' // algo 2
 import { setCollumnFromBar } from './../scripts/button-filter.js'
 import {
   getIngregdientForTag,

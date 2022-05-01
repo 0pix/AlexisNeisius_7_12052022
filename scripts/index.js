@@ -2,8 +2,7 @@
 /* eslint-disable no-unused-vars */
 // import { get } from 'fast-levenshtein'
 import { recipes } from './../data/recipes.js'
-// import { getIdRecipe, getGoodRecipe } from './../scripts/firstAlgoSearchBar.js'     // algo 1
-import { getIdRecipe, getGoodRecipe } from './../scripts/secondAlgoSearchBar.js' // algo 2
+import { getIdRecipe, getGoodRecipe } from './../scripts/secondAlgoSearchBar.js'
 import { setCollumnFromBar } from './../scripts/button-filter.js'
 import {
   getIngregdientForTag,

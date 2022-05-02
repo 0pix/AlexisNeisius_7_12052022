@@ -53,14 +53,19 @@ const data = {
 }
 
 /** *************|Barre de recherche principal algo |***************/
+
 // écrire dans la principale barre de recherche
-/* searchBar.addEventListener('keydown', function (event) {
-  showRecipeGrid(event)
-}) */
+searchBar.addEventListener('keydown', function (event) {
+  if (event.target.value.length >= 3 || event.target.value.length === 0) {
+    showRecipeGrid(event)
+  }
+})
 
 // écrire dans la principale barre de recherche
 searchBar.addEventListener('keyup', function (event) {
-  showRecipeGrid(event)
+  if (event.target.value.length >= 3 || event.target.value.length === 0) {
+    showRecipeGrid(event)
+  }
 })
 
 function showRecipeGrid (event) {

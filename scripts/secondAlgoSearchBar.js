@@ -1,3 +1,64 @@
+export function getRecipes (recipes, recipesFiltered, allChecked) {
+  const input = document.getElementById('search-bar').value
+
+  let recipe = recipes.filter(obj => {
+    const name = obj.name.toLowerCase()
+    const descriptionLowerCase = obj.description.toLowerCase()
+
+    // description
+    if (input && descriptionLowerCase.includes(input.toLowerCase())) {
+      return true
+    }
+
+    // name
+    if (input && name.includes(input.toLowerCase())) {
+      return true
+    }
+
+    // ingredient
+    const myingredient = obj.ingredients.filter(object => {
+      const ingredientLowerCase = object.ingredient.toLowerCase()
+        return input && ingredientLowerCase.includes(input.toLowerCase())
+    })
+    
+    // // ingredient
+    // const myingredient = obj.ingredients.filter(object => {
+    //   const ingredientLowerCase = object.ingredient.toLowerCase()
+    //   if (input && ingredientLowerCase.includes(input.toLowerCase())) {
+    //     return true
+    //   }
+    //   return false
+    // })
+
+    // return input && ingredientLowerCase.includes(input.toLowerCase())
+    if (myingredient.length > 0) {
+      return true
+    }
+
+  })
+
+  /***************||***************/
+  // afficher toutes les recettes quand tout est vide
+  if (input === '' && recipe.length === 0) {
+    recipe = recipes;
+  }
+
+  const recipeTag = recipe.filter(obj => {
+    // tag
+    if (allChecked.length) {
+      console.log(obj, allChecked);
+      return filterTag(obj, allChecked)
+    }
+    return true
+  })
+  // afficher toutes les recettes quand tout est vide
+  if (input === '' && allChecked.length === 0) {
+    return recipes
+  }
+  return recipeTag
+}
+
+// poubelle
 export function getIdRecipe (recipes, allChecked) {
   const input = document.getElementById('search-bar').value
 
@@ -50,12 +111,11 @@ export function getIdRecipe (recipes, allChecked) {
 
 // afficher les recettes grâce aux id
 export function getGoodRecipe (recipes, ids) {
-  // const input = event?.target.value
   const input = document.getElementById('search-bar').value
   const goodRecipe = []
   recipes.forEach(recipe => {
     ids.forEach(id => {
-      if (recipe.id === id) {
+      if (recipe.id === id.id) {
         let html = ''
         recipe.ingredients.forEach(ingr => {
           html += `<li>${ingr.ingredient}: ${ingr.quantity || ingr.quantite || ''} ${ingr.unit || ''}</li>`
@@ -112,6 +172,5 @@ function filterTag (obj, allChecked) {
        return obj.ustensils.find(element => element.toLowerCase() === ustensil.item.toLowerCase() + 's' || ustensil.item.toLowerCase() === element.toLowerCase() + 's' || ustensil.item.toLowerCase() === element.toLowerCase())
      })
 
-  if ((ingredients.length === 0 || conditionIngredients) && (appareils.length === 0 || conditionAppareils) && (ustensils.length === 0 || conditionUstensils)) return obj.id
-  return 0
+  return !!((ingredients.length === 0 || conditionIngredients) && (appareils.length === 0 || conditionAppareils) && (ustensils.length === 0 || conditionUstensils))
 }

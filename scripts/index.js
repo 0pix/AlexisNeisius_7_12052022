@@ -2,7 +2,8 @@
 /* eslint-disable no-unused-vars */
 // import { get } from 'fast-levenshtein'
 import { recipes } from './../data/recipes.js'
-import { getIdRecipe, getGoodRecipe } from './../scripts/secondAlgoSearchBar.js'
+// import {getGoodRecipe, getRecipes } from './../scripts/firstAlgoSearchBar.js'     // algo 1
+import { getIdRecipe, getGoodRecipe, getRecipes } from './../scripts/secondAlgoSearchBar.js' // algo 2
 import { setCollumnFromBar } from './../scripts/button-filter.js'
 import {
   getIngregdientForTag,
@@ -48,30 +49,27 @@ const data = {
   utensilsSearchBar: [],
   goodIds: [],
   goodRecipe: [],
-  checkedAll: []
+  checkedAll: [],
+  recipesFiltered: []
 }
 
 /** *************|Barre de recherche principal algo |***************/
 // écrire dans la principale barre de recherche
-searchBar.addEventListener('keydown', function (event) {
-  if (event.target.value.length >= 3 || event.target.value.length === 0) {
-    showRecipeGrid(event)
-  }
-})
+/* searchBar.addEventListener('keydown', function (event) {
+  showRecipeGrid(event)
+}) */
 
 // écrire dans la principale barre de recherche
 searchBar.addEventListener('keyup', function (event) {
-  if (event.target.value.length >= 3 || event.target.value.length === 0) {
-    showRecipeGrid(event)
-  }
+  showRecipeGrid(event)
 })
 
 function showRecipeGrid (event) {
   if (event.code === 'Backspace' && event.target.value === '') {
     event = null
   }
-  data.goodIds = getIdRecipe(recipes, data.checkedAll)
-  data.goodRecipe = getGoodRecipe(recipes, data.goodIds)
+  data.recipesFiltered = getRecipes(recipes, data.recipesFiltered, data.checkedAll)
+  data.goodRecipe = getGoodRecipe(recipes, data.recipesFiltered)
   recipeOnGrid()
 }
 
@@ -86,8 +84,10 @@ function init () {
   data.ingrediensFiltered = getIngregdientForTag(recipes) // récuperer tout les ingrédients
   data.devicesFiltered = getDevicesForTag(recipes) // récuperer tout les appareils
   data.utensilsFiltered = getUtensilsForTag(recipes) // récuperer tout les ustentils
-  data.goodIds = getIdRecipe(recipes, data.checkedAll)
-  data.goodRecipe = getGoodRecipe(recipes, data.goodIds)
+  data.recipesFiltered = getRecipes(recipes, data.recipesFiltered, data.checkedAll)
+  data.goodRecipe = getGoodRecipe(recipes, data.recipesFiltered)
+  /* data.goodIds = getIdRecipe(recipes, data.checkedAll)
+  data.goodRecipe = getGoodRecipe(recipes, data.goodIds) */
   recipeOnGrid()
   data.checkedAll = getTagChecked()
 }
@@ -169,8 +169,8 @@ document.addEventListener('click', function (event) {
   if (event.target.parentNode.classList.contains('tag')) {
     data.checkedAll = getTagChecked()
     TagsOnTop(data.checkedAll)
-    data.goodIds = getIdRecipe(recipes, data.checkedAll)
-    data.goodRecipe = getGoodRecipe(recipes, data.goodIds)
+    data.recipesFiltered = getRecipes(recipes, data.recipesFiltered, data.checkedAll)
+    data.goodRecipe = getGoodRecipe(recipes, data.recipesFiltered)
     recipeOnGrid()
   }
 })
@@ -181,8 +181,8 @@ document.addEventListener('click', function (event) {
     uncheckTag(event)
     data.checkedAll = getTagChecked()
     TagsOnTop(data.checkedAll)
-    data.goodIds = getIdRecipe(recipes, data.checkedAll)
-    data.goodRecipe = getGoodRecipe(recipes, data.goodIds)
+    data.recipesFiltered = getRecipes(recipes, data.recipesFiltered, data.checkedAll, 'removeTag')
+    data.goodRecipe = getGoodRecipe(recipes, data.recipesFiltered)
     recipeOnGrid()
   }
 })

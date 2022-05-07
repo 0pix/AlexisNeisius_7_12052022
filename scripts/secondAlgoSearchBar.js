@@ -1,4 +1,5 @@
-export function getRecipes (recipes, recipesFiltered, allChecked) {
+// rechercher les recettes qui correspondent au mot de la barre de recherche
+export function getRecipes (recipes, allChecked) {
   const input = document.getElementById('search-bar').value
 
   let recipe = recipes.filter(obj => {
@@ -18,98 +19,36 @@ export function getRecipes (recipes, recipesFiltered, allChecked) {
     // ingredient
     const myingredient = obj.ingredients.filter(object => {
       const ingredientLowerCase = object.ingredient.toLowerCase()
-        return input && ingredientLowerCase.includes(input.toLowerCase())
+      return input && ingredientLowerCase.includes(input.toLowerCase())
     })
-    
-    // // ingredient
-    // const myingredient = obj.ingredients.filter(object => {
-    //   const ingredientLowerCase = object.ingredient.toLowerCase()
-    //   if (input && ingredientLowerCase.includes(input.toLowerCase())) {
-    //     return true
-    //   }
-    //   return false
-    // })
 
-    // return input && ingredientLowerCase.includes(input.toLowerCase())
     if (myingredient.length > 0) {
       return true
     }
-
   })
 
-  /***************||***************/
-  // afficher toutes les recettes quand tout est vide
+  // afficher toutes les recettes
   if (input === '' && recipe.length === 0) {
-    recipe = recipes;
+    recipe = recipes
   }
 
+  // tag
   const recipeTag = recipe.filter(obj => {
-    // tag
     if (allChecked.length) {
-      console.log(obj, allChecked);
+      console.log(obj, allChecked)
       return filterTag(obj, allChecked)
     }
     return true
   })
-  // afficher toutes les recettes quand tout est vide
+
+  // afficher toutes les recettes
   if (input === '' && allChecked.length === 0) {
     return recipes
   }
   return recipeTag
 }
 
-// poubelle
-export function getIdRecipe (recipes, allChecked) {
-  const input = document.getElementById('search-bar').value
-
-  let ids = recipes.map(obj => {
-    const name = obj.name.toLowerCase()
-    const descriptionLowerCase = obj.description.toLowerCase()
-
-    // name
-    if (input && name.includes(input.toLowerCase())) {
-      return obj.id
-    }
-
-    // description
-    if (input && descriptionLowerCase.includes(input.toLowerCase())) {
-      return obj.id
-    }
-
-    // tag
-    if (allChecked.length) {
-      return filterTag(obj, allChecked)
-    }
-
-    // ingredient
-    const myingredient = obj.ingredients.filter(object => {
-      const ingredientLowerCase = object.ingredient.toLowerCase()
-      if (input && ingredientLowerCase.includes(input.toLowerCase())) {
-        return true
-      }
-      return false
-    })
-
-    // return input && ingredientLowerCase.includes(input.toLowerCase())
-    if (myingredient.length > 0) {
-      return obj.id
-    }
-
-    console.log('coucou')
-  }).filter(id => id !== undefined)
-
-  // afficher toutes les recettes quand tout est vide
-  if (input === '' && allChecked.length === 0) {
-    ids = recipes.map(obj => obj.id)
-  }
-
-  // enelever les doublons
-  ids = [...new Set(ids)]
-  console.log(ids)
-  return ids
-}
-
-// afficher les recettes grâce aux id
+// afficher les recettes
 export function getGoodRecipe (recipes, ids) {
   const input = document.getElementById('search-bar').value
   const goodRecipe = []
@@ -132,9 +71,7 @@ export function getGoodRecipe (recipes, ids) {
                             ${recipe.time} min
                         </div>
                     </div>
-
                     <div class="list-text">
-
                         <ul>
                             ${html}
                         </ul>

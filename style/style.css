@@ -20,7 +20,6 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
   font-family: Lato;
-  background-color: #2e2e2e;
 }
 
 main {
@@ -187,7 +186,7 @@ header a {
   background-color: #ED6454;
 }
 
-.header {
+.btn-top {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -203,7 +202,7 @@ header a {
   gap: 20px;
 }
 
-.header button {
+.btn-top button {
   background-image: url(../../../img/svg/fleche.svg);
   background-repeat: no-repeat;
   background-position: center;
@@ -228,18 +227,6 @@ header a {
   overflow-x: hidden;
 }
 
-.test {
-  width: 150px;
-  height: 10px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin-left: 5px;
-}
-
 .hide {
   display: none;
 }
@@ -250,6 +237,7 @@ header a {
 }
 
 .test {
+  width: 150px;
   height: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -258,6 +246,7 @@ header a {
       -ms-flex-align: center;
           align-items: center;
   font-size: 14px;
+  margin-left: 5px;
 }
 
 .test label {
@@ -265,7 +254,7 @@ header a {
 }
 
 .test label:hover {
-  background-color: #5095fd;
+  color: #ffffffb2;
 }
 
 .filter-input::-webkit-input-placeholder {
@@ -420,7 +409,6 @@ header a {
   position: fixed;
   left: 0;
   top: 0;
-  background-color: #2768ca3d;
   z-index: 998;
 }
 

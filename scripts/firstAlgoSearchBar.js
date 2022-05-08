@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 
-export function getRecipes (recipes, recipesFiltered, allChecked) {
+export function getRecipes (recipes, allChecked) {
   const input = document.getElementById('search-bar').value
 
   let recipe = []
@@ -35,9 +35,7 @@ export function getRecipes (recipes, recipesFiltered, allChecked) {
     }
   }
 
-  /** *************||***************/
-
-  // afficher toutes les recettes quand tout est vide
+  // afficher recipes
   if (input === '' && recipe.length === 0) {
     recipe = recipes
   }
@@ -56,17 +54,18 @@ export function getRecipes (recipes, recipesFiltered, allChecked) {
     }
   }
 
-  console.log('recipeTag', recipeTag)
+  // enlever les doublons
   recipeTag = [...new Set(recipeTag)]
 
-  // afficher toutes les recettes quand tout est vide
+  // afficher recipes
   if (input === '' && allChecked.length === 0) {
     return recipes
   }
+
   return recipeTag
 }
 
-// afficher les recettes grâce aux id
+// afficher les recettes
 export function getGoodRecipe (recipes, ids) {
   const input = document.getElementById('search-bar').value
   const recipe = []

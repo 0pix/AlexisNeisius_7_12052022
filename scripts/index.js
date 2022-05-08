@@ -46,13 +46,12 @@ const data = {
   devicesSearchBar: [],
   utensilsFiltered: [],
   utensilsSearchBar: [],
-  goodIds: [],
   goodRecipe: [],
   checkedAll: [],
   recipesFiltered: []
 }
 
-/** *************|Barre de recherche principal algo |***************/
+/** *************|Barre de recherche principal |***************/
 
 // écrire dans la principale barre de recherche
 searchBar.addEventListener('keydown', function (event) {
@@ -72,7 +71,7 @@ function showRecipeGrid (event) {
   if (event.code === 'Backspace' && event.target.value === '') {
     event = null
   }
-  data.recipesFiltered = getRecipes(recipes, data.recipesFiltered, data.checkedAll)
+  data.recipesFiltered = getRecipes(recipes, data.checkedAll)
   data.goodRecipe = getGoodRecipe(recipes, data.recipesFiltered)
   recipeOnGrid()
 }
@@ -83,16 +82,14 @@ function recipeOnGrid () {
   gridCard.innerHTML = data.goodRecipe.join('')
 }
 
-/** *************|Filters|***************/
+/** *************|Tag|***************/
+
 function init () {
   data.ingrediensFiltered = getIngregdientForTag(recipes) // récuperer tout les ingrédients
   data.devicesFiltered = getDevicesForTag(recipes) // récuperer tout les appareils
   data.utensilsFiltered = getUtensilsForTag(recipes) // récuperer tout les ustentils
-  data.recipesFiltered = getRecipes(recipes, data.recipesFiltered, data.checkedAll)
+  data.recipesFiltered = getRecipes(recipes, data.checkedAll)
   data.goodRecipe = getGoodRecipe(recipes, data.recipesFiltered)
-
-  /* data.goodIds = getIdRecipe(recipes, data.checkedAll)
-  data.goodRecipe = getGoodRecipe(recipes, data.goodIds) */
   recipeOnGrid()
   data.checkedAll = getTagChecked()
 }
@@ -174,7 +171,7 @@ document.addEventListener('click', function (event) {
   if (event.target.parentNode.classList.contains('tag')) {
     data.checkedAll = getTagChecked()
     TagsOnTop(data.checkedAll)
-    data.recipesFiltered = getRecipes(recipes, data.recipesFiltered, data.checkedAll)
+    data.recipesFiltered = getRecipes(recipes, data.checkedAll)
     data.goodRecipe = getGoodRecipe(recipes, data.recipesFiltered)
     recipeOnGrid()
   }
@@ -186,7 +183,7 @@ document.addEventListener('click', function (event) {
     uncheckTag(event)
     data.checkedAll = getTagChecked()
     TagsOnTop(data.checkedAll)
-    data.recipesFiltered = getRecipes(recipes, data.recipesFiltered, data.checkedAll, 'removeTag')
+    data.recipesFiltered = getRecipes(recipes, data.checkedAll)
     data.goodRecipe = getGoodRecipe(recipes, data.recipesFiltered)
     recipeOnGrid()
   }

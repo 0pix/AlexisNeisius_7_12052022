@@ -41,6 +41,7 @@ export function getRecipes (recipes, allChecked) {
   }
 
   // tag
+  // Nouveau filtre sur le tableau des recettes sélectionnées
   let recipeTag = []
   for (let h = 0; h <= recipe.length - 1; h++) {
     if (allChecked.length) {

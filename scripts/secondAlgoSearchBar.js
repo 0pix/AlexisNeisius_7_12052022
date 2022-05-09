@@ -33,9 +33,9 @@ export function getRecipes (recipes, allChecked) {
   }
 
   // tag
+  // Nouveau filtre sur le tableau des recettes sélectionnées
   const recipeTag = recipe.filter(obj => {
     if (allChecked.length) {
-      console.log(obj, allChecked)
       return filterTag(obj, allChecked)
     }
     return true

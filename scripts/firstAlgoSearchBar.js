@@ -44,7 +44,6 @@ export function getRecipes (recipes, allChecked) {
   let recipeTag = []
   for (let h = 0; h <= recipe.length - 1; h++) {
     if (allChecked.length) {
-      console.log(filterTag(recipe[h], allChecked))
       const test = filterTag(recipe[h], allChecked)
       if (test === true) {
         recipeTag.push(recipe[h])
